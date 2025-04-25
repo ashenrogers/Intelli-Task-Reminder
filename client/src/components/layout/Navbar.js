@@ -11,7 +11,7 @@ const Navbar = ({ isAuthenticated, loading, logout }) => {
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
     };
-
+//dsfsdfsdjnfksdf
     const authLinks = (
         <ul className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
             <li>
