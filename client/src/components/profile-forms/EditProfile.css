@@ -1,170 +1,203 @@
-import React, { useState, Fragment, useEffect } from "react";
-import { Link, withRouter } from "react-router-dom";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { createProfile, getCurrentProfile } from "../../actions/profile";
-import ''./EditProfile.css'; // Import the new CSS file
+/* EditProfile.css - Premium styling for the profile editing page */
 
-const EditProfile = ({
-  createProfile,
-  getCurrentProfile,
-  profile: { profile, loading },
-  history
-}) => {
-  const [formData, setFormData] = useState({
-    location: "",
-    age: "",
-    bio: "",
-    twitter: "",
-    facebook: "",
-    instagram: ""
-  });
-
-  const onSubmit = e => {
-    e.preventDefault();
-    createProfile(formData, history, true);
-    setFormData({
-      location: "",
-      age: "",
-      bio: "",
-      twitter: "",
-      facebook: "",
-      instagram: ""
-    });
-  };
-
-  const onChange = e =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-
-  const [displaySocialInputs, toggleSocialInputs] = useState(false);
-
-  useEffect(() => {
-    getCurrentProfile();
-
-    setFormData({
-      location: loading || !profile.location ? "" : profile.location,
-      age: loading || !profile.age ? "" : profile.age,
-      bio: loading || !profile.bio ? "" : profile.bio,
-      twitter: loading || !profile.twitter ? "" : profile.twitter,
-      facebook: loading || !profile.facebook ? "" : profile.facebook,
-      instagram: loading || !profile.instagram ? "" : profile.instagram
-    });
-  }, []);
-
-  const { location, age, bio, twitter, facebook, instagram } = formData;
-
-  return (
-    <div className="edit-profile-container">
-      <h1 className="large text-primary">Tell us more about yourself</h1>
-      <form className="form" onSubmit={e => onSubmit(e)}>
-        <div className="form-section">
-          <h3 className="form-section-title">Basic Information</h3>
-          <div className="form-group">
-            <input
-              type="text"
-              placeholder="Age"
-              name="age"
-              value={age}
-              onChange={e => onChange(e)}
-            />
-            <small className="form-text">Your age</small>
-          </div>
-          <div className="form-group">
-            <input
-              type="text"
-              placeholder="Location"
-              name="location"
-              value={location}
-              onChange={e => onChange(e)}
-            />
-            <small className="form-text">
-              City & province suggested (eg. Colombo, Western)
-            </small>
-          </div>
-        </div>
-        
-        <div className="form-section">
-          <h3 className="form-section-title">About You</h3>
-          <div className="form-group">
-            <textarea
-              placeholder="A short bio of yourself"
-              name="bio"
-              value={bio}
-              onChange={e => onChange(e)}
-            ></textarea>
-            <small className="form-text">Tell us a little about yourself</small>
-          </div>
-        </div>
-
-        <div className="my-2">
-          <button
-            onClick={() => toggleSocialInputs(!displaySocialInputs)}
-            type="button"
-            className="btn btn-light"
-          >
-            {displaySocialInputs ? 'Hide Social Links' : 'Add Social Network Links'}
-          </button>
-          <span>Optional</span>
-        </div>
-        
-        {displaySocialInputs && (
-          <div className="social-media-container">
-            <h3 className="social-media-title">Connect Your Social Media</h3>
-            <div className="form-group social-input">
-              <i className="fab fa-twitter fa-2x"></i>
-              <input
-                type="text"
-                placeholder="Twitter URL"
-                name="twitter"
-                value={twitter}
-                onChange={e => onChange(e)}
-              />
-            </div>
-
-            <div className="form-group social-input">
-              <i className="fab fa-facebook fa-2x"></i>
-              <input
-                type="text"
-                placeholder="Facebook URL"
-                name="facebook"
-                value={facebook}
-                onChange={e => onChange(e)}
-              />
-            </div>
-            <div className="form-group social-input">
-              <i className="fab fa-instagram fa-2x"></i>
-              <input
-                type="text"
-                placeholder="Instagram URL"
-                name="instagram"
-                value={instagram}
-                onChange={e => onChange(e)}
-              />
-            </div>
-          </div>
-        )}
-
-        <div className="form-actions">
-          <input type="submit" className="btn btn-primary my-1" value="Save Profile" />
-          <Link className="btn btn-light my-1" to="/dashboard">
-            Go Back
-          </Link>
-        </div>
-      </form>
-    </div>
-  );
-};
-
-EditProfile.propTypes = {
-  createProfile: PropTypes.func.isRequired,
-  getCurrentProfile: PropTypes.func.isRequired,
-  profile: PropTypes.object.isRequired
-};
-
-const mapStateToProps = state => ({
-  profile: state.profile
-});
-
-export default connect(mapStateToProps, { createProfile, getCurrentProfile })(
-  withRouter(EditProfile)
-);
+/* Main container styling */
+.edit-profile-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    padding: 2.5rem;
+  }
+  
+  /* Page title styling */
+  .large.text-primary {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 3px solid #3498db;
+    display: inline-block;
+  }
+  
+  /* Form styling */
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  
+  .form-group {
+    margin-bottom: 1.25rem;
+    position: relative;
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background-color: #f9f9f9;
+  }
+  
+  .form-group input:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.15);
+    background-color: #fff;
+  }
+  
+  .form-group textarea {
+    min-height: 120px;
+    resize: vertical;
+  }
+  
+  .form-text {
+    display: block;
+    margin-top: 0.5rem;
+    color: #7f8c8d;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+  
+  /* Social media section */
+  .my-2 {
+    margin: 1.5rem 0;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .my-2 span {
+    color: #95a5a6;
+    font-size: 0.9rem;
+    font-style: italic;
+  }
+  
+  .social-input {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .social-input i {
+    color: #7f8c8d;
+    min-width: 40px;
+    text-align: center;
+  }
+  
+  .social-input i.fa-twitter {
+    color: #1da1f2;
+  }
+  
+  .social-input i.fa-facebook {
+    color: #3b5998;
+  }
+  
+  .social-input i.fa-instagram {
+    color: #e1306c;
+  }
+  
+  /* Button styling */
+  .btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+  }
+  
+  .btn-primary {
+    background-color: #3498db;
+    color: white;
+  }
+  
+  .btn-primary:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .btn-light {
+    background-color: #f0f2f5;
+    color: #2c3e50;
+  }
+  
+  .btn-light:hover {
+    background-color: #e2e6ea;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  }
+  
+  .my-1 {
+    margin: 0.75rem 0;
+  }
+  
+  /* Form actions */
+  .form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  
+  /* Social media container */
+  .social-media-container {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+    border: 1px solid #e9ecef;
+  }
+  
+  .social-media-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+  }
+  
+  /* Form section */
+  .form-section {
+    margin-bottom: 2rem;
+  }
+  
+  .form-section-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #e9ecef;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .edit-profile-container {
+      padding: 1.5rem;
+      margin: 1rem;
+    }
+    
+    .large.text-primary {
+      font-size: 1.8rem;
+    }
+    
+    .social-input {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    .form-actions {
+      flex-direction: column;
+    }
+  }
