@@ -1,5 +1,5 @@
-import React, { Fragment, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useHistory } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./TaskForm.css"; // Import the new CSS file
@@ -19,6 +19,8 @@ const TaskForm = ({ addTask }) => {
     category: ""
   });
 
+  const history = useHistory();  // Hook for navigation
+
   const onSubmit = e => {
     e.preventDefault();
     addTask(formData);
@@ -30,6 +32,14 @@ const TaskForm = ({ addTask }) => {
       priority: "Medium",
       category: ""
     });
+
+    // Show success message
+    alert("Task created successfully!");
+
+    // Redirect to the tasks page after 2 seconds
+    setTimeout(() => {
+      history.push("/tasks");
+    }, 2000);
   };
 
   const onChange = e =>
