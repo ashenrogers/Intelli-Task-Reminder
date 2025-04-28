@@ -55,6 +55,28 @@ export default function(state=initialState,action) {
                 error:payload,
                 loading:false
             }
+            case 'MOVE_TO_RECYCLE_BIN':
+                const taskToDelete = state.tasks.find(task => task._id === action.payload);
+                return {
+                  ...state,
+                  tasks: state.tasks.filter(task => task._id !== action.payload),
+                  deletedTasks: [taskToDelete, ...state.deletedTasks]
+                };
+              
+              case 'RECOVER_TASK':
+                const recoveredTask = state.deletedTasks.find(task => task._id === action.payload);
+                return {
+                  ...state,
+                  deletedTasks: state.deletedTasks.filter(task => task._id !== action.payload),
+                  tasks: [recoveredTask, ...state.tasks]
+                };
+              
+              case 'PERMANENTLY_DELETE_TASK':
+                return {
+                  ...state,
+                  deletedTasks: state.deletedTasks.filter(task => task._id !== action.payload)
+                };
+              
 
         
         default:
