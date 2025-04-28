@@ -1,6 +1,6 @@
-<<<<<<< HEAD
+
 # Intelli-Task-Reminder
-Taske Reminder system
+Task Reminder system
 =======
 # 📅 Task Reminder App
 
@@ -34,5 +34,3 @@ This Task Reminder application is built on the MERN (MongoDB, Express, React, No
 - `PUT /api/tasks/:id`: Update task details
 - `DELETE /api/tasks/:id`: Delete a task
 
-
->>>>>>> 4ce57ee (Initial project upload)

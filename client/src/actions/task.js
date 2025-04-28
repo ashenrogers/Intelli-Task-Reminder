@@ -7,8 +7,46 @@ import {
   TASK_ERROR,
   UPDATE_TASK,
   DELETE_TASK,
-  ADD_TASK
+  ADD_TASK,
+  MOVE_TO_RECYCLE_BIN,
+  RECOVER_TASK,
+  PERMANENTLY_DELETE_TASK
 } from "./types";
+
+// Move task to recycle bin (soft delete)
+export const moveToRecycleBin = (taskId) => dispatch => {
+  dispatch({
+    type: MOVE_TO_RECYCLE_BIN,
+    payload: taskId
+  });
+};
+
+// Recover task from recycle bin
+export const recoverTask = (taskId) => dispatch => {
+  dispatch({
+    type: RECOVER_TASK,
+    payload: taskId
+  });
+};
+
+// Permanently delete task (hard delete, from backend)
+export const permanentlyDeleteTask = (taskId) => async dispatch => {
+  try {
+    await axios.delete(`/api/tasks/${taskId}`);
+    dispatch({
+      type: PERMANENTLY_DELETE_TASK,
+      payload: taskId
+    });
+    dispatch(setAlert("Task Permanently Deleted", "success"));
+  } catch (error) {
+    dispatch({
+      type: TASK_ERROR,
+      payload: { msg: error.response.statusText, status: error.response.status }
+    });
+    dispatch(setAlert("Operation Failed", "danger"));
+  }
+};
+
 
 //get a single task by id
 export const getTaskById = taskId => async dispatch => {

@@ -15,6 +15,7 @@ import TaskForm from '../Tasks/TaskForm';
 import NotFound from '../layout/notFound';
 import VoiceForm from '../Tasks/VoiceForm';
 import TaskReport from '../Tasks/TaskReport';
+import RecycleBin from '../Tasks/RecycleBin';
 
 const Routes = ()=>{
     return (
@@ -33,6 +34,7 @@ const Routes = ()=>{
                 <PrivateRoute exact path="/create-task" component={TaskForm}/>
                 <PrivateRoute exact path="/voice-task" component={VoiceForm}/>
                 <PrivateRoute exact path="/task-report" component={TaskReport}/>
+                <PrivateRoute exact path="/recyclebin" component={RecycleBin}/>
                 <Route component={NotFound}/>
                 </Switch>
             </section>

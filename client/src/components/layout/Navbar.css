@@ -28,7 +28,7 @@
 
 .logo a {
     color: var(--text-color);
-    font-size: 1.5rem;
+    font-size: 1.9rem;
     font-weight: bold;
     text-decoration: none;
     display: flex;
@@ -42,7 +42,7 @@
 }
 
 .logo i {
-    font-size: 1.7rem;
+    font-size: 2.5rem;
 }
 
 .nav-links {
@@ -61,6 +61,7 @@
     color: var(--text-color);
     text-decoration: none;
     font-weight: 500;
+    font-size: larger;
     position: relative;
     transition: color 0.3s ease;
     padding: 5px 10px;
