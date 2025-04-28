@@ -129,7 +129,7 @@ const Tasks = ({ getTasks, task: { tasks, loading } }) => {
                     Download Report <FaFilePdf />
                 </Link>
                 
-                <Link className="btn btn-danger my-1" to="/recycle-bin">
+                <Link className="btn btn-danger my-1" to="/RecycleBin">
                  🗑️ Recycle Bin
                 </Link>
 

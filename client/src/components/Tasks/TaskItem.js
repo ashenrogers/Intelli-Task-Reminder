@@ -37,7 +37,7 @@ const TaskItem = ({
             Update
           </Link>
         )}
-        <button className="btn btn-danger" onClick={() => moveToRecycleBin(task._id)}>
+        <button className="btn btn-danger" onClick={() => moveToRecycleBin(_id)}>
          Delete 🗑️
         </button>
       </div>

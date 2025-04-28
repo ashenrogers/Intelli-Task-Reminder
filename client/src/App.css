@@ -629,3 +629,23 @@ button {
   }
   
 }
+
+/* task delete style */
+.task-card.deleted {
+  background: #ffe6e6;
+  border: 1px solid #ff4d4d;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+.task-card.deleted:hover {
+  background: #ffcccc;
+  transform: scale(1.02);
+}
+
+.btn-success {
+  margin-right: 1rem;
+}
+
