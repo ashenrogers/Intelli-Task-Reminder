@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
@@ -7,9 +7,22 @@ import { getProfiles } from '../../actions/profile';
 import './profiles.css'; // Import the new CSS file
 
 const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
+  const [searchTerm, setSearchTerm] = useState('');
+
   useEffect(() => {
     getProfiles();
   }, [getProfiles]);
+
+  // Filter profiles based on search term (name, skill, location)
+  const filteredProfiles = profiles.filter((profile) => {
+    const nameMatch = profile.user.name.toLowerCase().includes(searchTerm.toLowerCase());
+    const locationMatch = profile.location && profile.location.toLowerCase().includes(searchTerm.toLowerCase());
+    const skillsMatch = profile.skills && profile.skills.some(skill => 
+      skill.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    return nameMatch || locationMatch || skillsMatch;
+  });
 
   return (
     <Fragment>
@@ -29,12 +42,14 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
               type="text" 
               className="search-box" 
               placeholder="Search users by name, skill or location..." 
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
 
           <div className="profiles-grid">
-            {profiles.length > 0 ? (
-              profiles.map(profile => (
+            {filteredProfiles.length > 0 ? (
+              filteredProfiles.map(profile => (
                 <ProfileItem key={profile._id} profile={profile} />
               ))
             ) : (
