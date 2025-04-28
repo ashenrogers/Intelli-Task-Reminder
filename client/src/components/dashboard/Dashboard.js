@@ -6,6 +6,7 @@ import { getCurrentProfile, deleteAccountAndProfile } from "../../actions/profil
 import Spinner from "../layout/Spinner";
 import DashboardEdit from "./DashboardEdit";
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
+import './Dashboard.css';
 
 const Dashboard = ({
   getCurrentProfile,
