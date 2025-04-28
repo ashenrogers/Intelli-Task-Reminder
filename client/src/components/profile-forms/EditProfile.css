@@ -1,184 +1,51 @@
-/* EditProfile.css - Premium styling for the profile editing page */
+/* Updated Form Group */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.8rem; /* more bottom space between fields */
+}
 
-/* Main container */
-.edit-profile-container {
-    max-width: 750px;
-    margin: 3rem auto;
-    background: #ffffff;
-    border-radius: 12px;
-    padding: 3rem 2.5rem;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-    transition: all 0.3s ease;
-  }
-  
-  /* Page Title */
-  .large.text-primary {
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: #1d3557;
-    margin-bottom: 2rem;
-    border-bottom: 4px solid #457b9d;
-    padding-bottom: 1rem;
-    display: inline-block;
-  }
-  
-  /* Form Styling */
-  .form {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-  
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  
-  .form-group input,
-  .form-group textarea {
-    width: 100%;
-    padding: 0.9rem 1rem;
-    border: 1px solid #dcdcdc;
-    border-radius: 8px;
-    font-size: 1rem;
-    background: #fafafa;
-    transition: all 0.3s ease;
-  }
-  
-  .form-group input:focus,
-  .form-group textarea:focus {
-    border-color: #457b9d;
-    background: #fff;
-    box-shadow: 0 0 0 4px rgba(69, 123, 157, 0.15);
-    outline: none;
-  }
-  
-  .form-group textarea {
-    min-height: 140px;
-    resize: vertical;
-  }
-  
-  .form-text {
-    font-size: 0.85rem;
-    color: #6c757d;
-    margin-top: 0.25rem;
-  }
-  
-  /* Social media fields */
-  .social-media-container {
-    margin-top: 2rem;
-    padding: 1.75rem;
-    background: #f8f9fa;
-    border: 1px solid #e0e0e0;
-    border-radius: 10px;
-  }
-  
-  .social-media-title {
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: #2c3e50;
-    margin-bottom: 1.25rem;
-  }
-  
-  .social-input {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1rem;
-  }
-  
-  .social-input i {
-    font-size: 1.4rem;
-    width: 40px;
-    text-align: center;
-    color: #6c757d;
-  }
-  
-  .social-input i.fa-twitter { color: #1da1f2; }
-  .social-input i.fa-facebook { color: #3b5998; }
-  .social-input i.fa-instagram { color: #e1306c; }
-  
-  /* Buttons */
-  .btn {
-    padding: 0.8rem 1.8rem;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    transition: all 0.3s ease;
-  }
-  
-  .btn-primary {
-    background-color: #457b9d;
-    color: #ffffff;
-  }
-  
-  .btn-primary:hover {
-    background-color: #1d3557;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-    transform: translateY(-2px);
-  }
-  
-  .btn-light {
-    background-color: #f1f3f5;
-    color: #1d3557;
-  }
-  
-  .btn-light:hover {
-    background-color: #e9ecef;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-  }
-  
-  /* Form Actions */
-  .form-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin-top: 2rem;
-  }
-  
-  /* Margins */
-  .my-1 { margin: 1rem 0; }
-  .my-2 { margin: 2rem 0; }
-  
-  /* Form Sections */
-  .form-section {
-    margin-bottom: 2.5rem;
-  }
-  
-  .form-section-title {
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: #1d3557;
-    margin-bottom: 1rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid #dcdcdc;
-  }
-  
-  /* Responsive */
-  @media (max-width: 768px) {
-    .edit-profile-container {
-      padding: 2rem;
-      margin: 1rem;
-    }
-  
-    .large.text-primary {
-      font-size: 2rem;
-    }
-  
-    .form-actions {
-      flex-direction: column;
-    }
-  
-    .social-input {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-  }
-  
+/* Input and Textarea Fields */
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 1rem 1.25rem; /* increased internal padding */
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: #fafafa;
+  line-height: 1.6; /* better text breathing space */
+  transition: all 0.3s ease;
+}
+
+/* Placeholder text */
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #a0a0a0;
+  opacity: 1;
+  font-size: 0.95rem;
+}
+
+/* Focused Input & Textarea */
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #457b9d;
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(69, 123, 157, 0.15);
+  outline: none;
+}
+
+/* Textarea Specific */
+.form-group textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+/* Additional Spacing */
+.my-1 {
+  margin: 1rem 0;
+}
+.my-2 {
+  margin: 2rem 0;
+}
