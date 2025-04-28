@@ -5,6 +5,10 @@
   --light-color: #f4f4f4;
   --danger-color: #dc3545;
   --success-color: #28a745;
+  --secondary-color: #6c757d;
+  --border-radius: 8px;
+  --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
 }
 
 * {
@@ -123,15 +127,18 @@ img {
 }
 
 .btn {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   background: var(--light-color);
   color: #333;
-  padding: 0.4rem 1.3rem;
+  padding: 0.6rem 1.3rem;
   font-size: 1rem;
   border: none;
+  border-radius: var(--border-radius);
   cursor: pointer;
   margin-right: 0.5rem;
-  transition: opacity 0.2s ease-in;
+  transition: var(--transition);
   outline: none;
 }
 
@@ -160,6 +167,12 @@ img {
   color: #fff;
 }
 
+.btn-primary:hover {
+  background: #1390a5;
+  transform: translateY(-2px);
+  box-shadow: var(--box-shadow);
+}
+
 .btn-light,
 .bg-light,
 .badge-light,
@@ -170,12 +183,12 @@ img {
 
 .btn-dark {
   background: linear-gradient(to right, #f8f9fa, #689cbe);
-  border-radius: 8px;
+  border-radius: var(--border-radius);
   border: none;
   cursor: pointer;
   font-size: 1rem;
   font-family: inherit;
-  transition: all 0.3s ease;
+  transition: var(--transition);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -186,7 +199,7 @@ img {
 .btn-dark:hover {
   background: linear-gradient(to right, #e9ecef, #4d7ea7);
   transform: translateY(-2px);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--box-shadow);
 }
 
 .btn-icon {
@@ -209,14 +222,26 @@ img {
   color: #fff;
   display: flex;
   align-items: center;
-  border-radius: 8px;
+  border-radius: var(--border-radius);
 }
 
 .btn-danger:hover {
   background: #c82333;
   transform: translateY(-2px);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--box-shadow);
   opacity: 1;
+}
+
+.btn-secondary {
+  background: var(--secondary-color);
+  color: #fff;
+  border-radius: var(--border-radius);
+}
+
+.btn-secondary:hover {
+  background: #5a6268;
+  transform: translateY(-2px);
+  box-shadow: var(--box-shadow);
 }
 
 .btn-report {
@@ -226,15 +251,15 @@ img {
   font-family: inherit;
   display: flex;
   align-items: center;
-  border-radius: 8px;
+  border-radius: var(--border-radius);
   padding: 0.6rem 1.3rem;
-  transition: all 0.3s ease;
+  transition: var(--transition);
 }
 
 .btn-report:hover {
   background: #218838;
   transform: translateY(-2px);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--box-shadow);
   opacity: 1;
 }
 
@@ -244,6 +269,12 @@ img {
 .alert-success {
   background: var(--success-color);
   color: #fff;
+}
+
+.btn-success:hover {
+  background: #218838;
+  transform: translateY(-2px);
+  box-shadow: var(--box-shadow);
 }
 
 .bg-white,
@@ -256,6 +287,8 @@ img {
 
 .btn:hover {
   opacity: 0.8;
+  transform: translateY(-2px);
+  box-shadow: var(--box-shadow);
 }
 
 .bg-light,
@@ -472,7 +505,7 @@ button {
   border-radius: 25px;
   font-size: 16px;
   outline: none;
-  transition: all 0.3s ease-in-out;
+  transition: var(--transition);
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -513,27 +546,138 @@ button {
   margin-left: auto;
 }
 
+/* Task Item Styling */
 .task {
   display: flex;
   flex-direction: column;
   background: linear-gradient(to right, #f8f9fa, #689cbe);
   border-radius: 15px;
-  padding: 20px;
-  margin: 5px 0px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
+  padding: 25px;
+  margin: 15px 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: var(--transition);
+  position: relative;
 }
 
-.task-item:hover {
+.task:hover {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
   transform: translateY(-3px);
 }
 
+.task h2 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  font-size: 1.5rem;
+  color: #333;
+  display: inline-block;
+}
+
+.task p {
+  margin-bottom: 10px;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.task b {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
 .task .task-date {
-  color: #aaa;
-  font-size: 0.8rem;
-  margin-bottom: 0.5rem;
-} 
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+}
+
+/* Priority Colors */
+.priority-high {
+  color: #dc3545;
+  font-weight: bold;
+}
+
+.priority-medium {
+  color: #fd7e14;
+  font-weight: bold;
+}
+
+.priority-low {
+  color: #28a745;
+  font-weight: bold;
+}
+
+/* Task Action Buttons */
+.task div:last-child {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 15px;
+  gap: 10px;
+}
+
+.task .btn {
+  padding: 8px 16px;
+  font-weight: 500;
+}
+
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 30px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  animation: modalFadeIn 0.3s ease-out forwards;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-content h2 {
+  margin-top: 0;
+  color: #333;
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+}
+
+.modal-content p {
+  margin-bottom: 25px;
+  font-size: 1.1rem;
+  color: #555;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.modal-buttons button {
+  min-width: 150px;
+  padding: 10px 20px;
+}
 
 /* Filter Button Styling */
 .filter-container {
@@ -546,9 +690,9 @@ button {
   padding: 10px 20px;
   font-size: 16px;
   border: none;
-  border-radius: 8px;
+  border-radius: var(--border-radius);
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: var(--transition);
   width: auto;
 }
 
@@ -564,7 +708,7 @@ button {
   background-color: #f1f1f1;
   border-radius: 12px;
   animation: slideDown 0.5s ease forwards;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--box-shadow);
 }
 
 @keyframes slideDown {
@@ -583,7 +727,7 @@ button {
   padding: 10px 12px;
   margin-top: 10px;
   border: 1px solid #ccc;
-  border-radius: 8px;
+  border-radius: var(--border-radius);
   font-size: 16px;
   background-color: white;
 }
@@ -657,6 +801,15 @@ button {
   .btn {
     width: 100%;
     justify-content: center;
+  }
+
+  .modal-content {
+    width: 95%;
+    padding: 20px;
+  }
+
+  .modal-buttons {
+    flex-direction: column;
   }
   
   /* Profiles Page */
