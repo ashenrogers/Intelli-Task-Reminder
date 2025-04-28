@@ -46,7 +46,7 @@ const EditProfile = ({
     // Hide after 3 seconds
     setTimeout(() => {
       setSuccessMessage("");
-    }, 3000);
+    }, 2000);
   };
 
   const onChange = e =>
