@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment,useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import Moment from "react-moment";
@@ -55,5 +55,8 @@ TaskItem.propTypes = {
 const mapStateToProps = (state) => ({
   auth: state.auth
 });
+
+const [showConfirm, setShowConfirm] = useState(false);
+
 
 export default connect(mapStateToProps, { deleteTask, moveToRecycleBin })(TaskItem);
