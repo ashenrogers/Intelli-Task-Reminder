@@ -19,7 +19,8 @@ class EditTask extends React.Component {
       toBeReminded: "",
       completed: "",
       priority: "",
-      category: ""
+      category: "",
+      showUpdateModal: false // Added state for modal visibility
     };
   }
 
@@ -44,12 +45,23 @@ class EditTask extends React.Component {
       }
     }, 300);
   }
-  
 
   onSubmit = e => {
     e.preventDefault();
     this.props.updateTask(this.props.Task.task._id, this.state);
-    this.setState({ description: "", due_at: "", time: "", priority: "", category: "" });
+    this.setState({ 
+      description: "", 
+      due_at: "", 
+      time: "", 
+      priority: "", 
+      category: "",
+      showUpdateModal: true // Show success modal on update
+    });
+
+    // Redirect after 2 seconds
+    setTimeout(() => {
+      this.props.history.push("/tasks");
+    }, 2000);
   };
 
   onChange = e => {
@@ -205,6 +217,19 @@ class EditTask extends React.Component {
             </Link>
           </div>
         </form>
+
+        {/* Success Modal */}
+        {this.state.showUpdateModal && (
+          <div className="modal-overlay">
+            <div className="modal">
+              <h2>Task Updated Successfully!</h2>
+              <p>Your task has been updated. You will be redirected to the task list.</p>
+              <div className="modal-footer">
+                <button onClick={() => this.setState({ showUpdateModal: false })}>Close</button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     );
   }
