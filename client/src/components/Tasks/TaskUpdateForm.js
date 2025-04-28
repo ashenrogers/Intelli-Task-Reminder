@@ -7,6 +7,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { addDays } from "date-fns";
 import { updateTask, getTaskById } from "../../actions/task";
+import "./TaskUpdateForm.css"; // Import the CSS file
 
 class EditTask extends React.Component {
   constructor(props) {
@@ -61,118 +62,150 @@ class EditTask extends React.Component {
 
   render() {
     return (
-      <Fragment>
+      <div className="form-container">
         <h1 className="large text-primary">Edit Task</h1>
         <form className="form" onSubmit={e => this.onSubmit(e)}>
-          <div className="form-group">
-            <label htmlFor="descr">Description:</label>
-            <input
-              type="text"
-              placeholder="Task Description"
-              name="description"
-              value={this.state.description}
-              onChange={e => this.onChange(e)}
-            />
-          </div>
-          
-          <div className="form-group">
-            <label htmlFor="due_date">Due Date:</label>
-            <DatePicker
-              minDate={addDays(new Date(), 1)}
-              id="due_date"
-              name="due_at"
-              value={this.state.due_at}
-              onChange={date => this.onChangeDate(date)}
-            />
+          <div className="form-section">
+            <div className="form-section-title">Basic Information</div>
+            <div className="form-group">
+              <label htmlFor="descr">Description:</label>
+              <input
+                type="text"
+                placeholder="Task Description"
+                name="description"
+                value={this.state.description}
+                onChange={e => this.onChange(e)}
+              />
+            </div>
+            
+            <div className="form-group">
+              <label htmlFor="category">Category:</label>
+              <input
+                type="text"
+                placeholder="Enter Category"
+                name="category"
+                value={this.state.category}
+                onChange={e => this.onChange(e)}
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Priority:</label>
+              <select name="priority" value={this.state.priority} onChange={e => this.onChange(e)}>
+                <option value="">Select Priority</option>
+                <option value="High">
+                  <span className="priority-badge priority-high"></span> High
+                </option>
+                <option value="Medium">
+                  <span className="priority-badge priority-medium"></span> Medium
+                </option>
+                <option value="Low">
+                  <span className="priority-badge priority-low"></span> Low
+                </option>
+              </select>
+            </div>
           </div>
 
-          <div className="form-group">
-            <label>Time:</label>
-            <input
-              type="time"
-              name="time"
-              value={this.state.time}
-              onChange={e => this.onChange(e)}
-            />
+          <div className="form-section">
+            <div className="form-section-title">Schedule</div>
+            <div className="form-group">
+              <label htmlFor="due_date">Due Date:</label>
+              <DatePicker
+                minDate={addDays(new Date(), 1)}
+                id="due_date"
+                name="due_at"
+                value={this.state.due_at}
+                onChange={date => this.onChangeDate(date)}
+                placeholderText="Select a due date"
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Time:</label>
+              <input
+                type="time"
+                name="time"
+                value={this.state.time}
+                onChange={e => this.onChange(e)}
+              />
+            </div>
           </div>
 
-          <div className="form-group">
-            <label>Priority:</label>
-            <select name="priority" value={this.state.priority} onChange={e => this.onChange(e)}>
-              <option value="">Select Priority</option>
-              <option value="High">High</option>
-              <option value="Medium">Medium</option>
-              <option value="Low">Low</option>
-            </select>
+          <div className="form-section">
+            <div className="form-section-title">Status & Notifications</div>
+            <div className="form-group">
+              <label>Set Reminder:</label>
+              <div className="radio-group">
+                <div className="radio-option">
+                  <input
+                    type="radio"
+                    id="yesR"
+                    name="toBeReminded"
+                    value="true"
+                    checked={this.state.toBeReminded === "true"}
+                    onChange={e => this.onChange(e)}
+                  />
+                  <label htmlFor="yesR">Yes</label>
+                </div>
+                <div className="radio-option">
+                  <input
+                    type="radio"
+                    id="noR"
+                    name="toBeReminded"
+                    value="false"
+                    checked={this.state.toBeReminded === "false"}
+                    onChange={e => this.onChange(e)}
+                  />
+                  <label htmlFor="noR">No</label>
+                </div>
+              </div>
+            </div>
+
+            <div className="form-group">
+              <label>Status:</label>
+              <div className="radio-group">
+                <div className="radio-option">
+                  <input
+                    type="radio"
+                    id="completed"
+                    name="completed"
+                    value="true"
+                    checked={this.state.completed === "true"}
+                    onChange={e => this.onChange(e)}
+                  />
+                  <label htmlFor="completed">Completed</label>
+                </div>
+                <div className="radio-option">
+                  <input
+                    type="radio"
+                    id="pending"
+                    name="completed"
+                    value="false"
+                    checked={this.state.completed === "false"}
+                    onChange={e => this.onChange(e)}
+                  />
+                  <label htmlFor="pending">Pending</label>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <small>
+                * Reminder won't be sent if task status is <b>Completed</b>.
+              </small>
+            </div>
           </div>
 
-          <div className="form-group">
-            <label>Category:</label>
-            <input
-              type="text"
-              placeholder="Enter Category"
-              name="category"
-              value={this.state.category}
-              onChange={e => this.onChange(e)}
-            />
+          <div className="button-container">
+            <button type="submit" className="btn btn-primary">
+              <i className="fas fa-save"></i> Save Changes
+            </button>
+            <Link className="btn btn-light" to="/tasks">
+              <i className="fas fa-arrow-left"></i> Go Back
+            </Link>
           </div>
-
-          <div className="form-group">
-            <label>Set Reminder:</label>
-            <input
-              type="radio"
-              id="yesR"
-              name="toBeReminded"
-              value="true"
-              checked={this.state.toBeReminded === "true"}
-              onChange={e => this.onChange(e)}
-            />
-            <label htmlFor="yesR">Yes</label>
-            <input
-              type="radio"
-              id="noR"
-              name="toBeReminded"
-              value="false"
-              checked={this.state.toBeReminded === "false"}
-              onChange={e => this.onChange(e)}
-            />
-            <label htmlFor="noR">No</label>
-          </div>
-
-          <div className="form-group">
-            <label>Status:</label>
-            <input
-              type="radio"
-              id="completed"
-              name="completed"
-              value="true"
-              checked={this.state.completed === "true"}
-              onChange={e => this.onChange(e)}
-            />
-            <label htmlFor="completed">Completed</label>
-            <input
-              type="radio"
-              id="pending"
-              name="completed"
-              value="false"
-              checked={this.state.completed === "false"}
-              onChange={e => this.onChange(e)}
-            />
-            <label htmlFor="pending">Pending</label>
-          </div>
-
-          <div>
-            <small>
-              * Reminder won't be sent if task status is <b>Completed</b>.
-            </small>
-          </div>
-
-          <input type="submit" className="btn btn-primary my-1" />
-          <Link className="btn btn-light my-1" to="/tasks">
-          <i className="fas fa-arrow-left"></i> Go Back 
-          </Link>
         </form>
-      </Fragment>
+      </div>
     );
   }
 }

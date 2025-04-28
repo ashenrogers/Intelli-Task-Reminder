@@ -591,19 +591,23 @@ button {
 
 /* Priority Colors */
 .priority-high {
-  color: #dc3545;
+  color: #ff0019;
   font-weight: bold;
+  color: white; /* White text */
 }
 
 .priority-medium {
   color: #fd7e14;
   font-weight: bold;
+  color: white; /* White text */
 }
 
 .priority-low {
   color: #28a745;
   font-weight: bold;
+  color: white; /* White text */
 }
+
 
 /* Task Action Buttons */
 .task div:last-child {
