@@ -20,6 +20,29 @@ const Dashboard = ({
   useEffect(() => {
     getCurrentProfile();
   }, [getCurrentProfile]);
+
+  // Inside your Dashboard component (before return)
+const [formData, setFormData] = useState({
+  age: ''
+});
+const [formErrors, setFormErrors] = useState({
+  age: ''
+});
+
+const handleInputChange = (e) => {
+  const { name, value } = e.target;
+
+  // Validation
+  if (name === "age") {
+    if (!/^\d*$/.test(value)) {
+      setFormErrors(prev => ({ ...prev, age: 'Please enter numbers only' }));
+    } else {
+      setFormErrors(prev => ({ ...prev, age: '' }));
+    }
+  }
+
+  setFormData(prev => ({ ...prev, [name]: value }));
+};
   
 
   // Calculate completed and incomplete tasks
