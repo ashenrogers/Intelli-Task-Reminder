@@ -1,0 +1,208 @@
+/* Main container styling */
+.profiles-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  }
+  
+  /* Page header styling */
+  .page-header {
+    margin-bottom: 2rem;
+    border-bottom: 2px solid #6c63ff;
+    padding-bottom: 1rem;
+  }
+  
+  .page-header h1 {
+    color: #333;
+    font-size: 2.5rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.5rem;
+  }
+  
+  .page-header .subtitle {
+    color: #6c6c6c;
+    font-size: 1.1rem;
+  }
+  
+  /* Profiles grid layout */
+  .profiles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+  
+  /* Empty state styling */
+  .empty-state {
+    text-align: center;
+    padding: 3rem;
+    background-color: #fff;
+    border-radius: 8px;
+    border: 1px dashed #e0e0e0;
+    grid-column: 1 / -1;
+  }
+  
+  .empty-state h4 {
+    color: #6c6c6c;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .empty-state .icon {
+    font-size: 3rem;
+    color: #d0d0d0;
+    margin-bottom: 1rem;
+  }
+  
+  /* Loading state container */
+  .loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 300px;
+  }
+  
+  /* Filter and search section */
+  .filter-section {
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+  
+  .search-box {
+    padding: 0.75rem 1rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    width: 100%;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+  }
+  
+  .search-box:focus {
+    outline: none;
+    border-color: #6c63ff;
+    box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.1);
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .profiles-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .profiles-container {
+      padding: 1rem;
+    }
+    
+    .page-header h1 {
+      font-size: 2rem;
+    }
+  }
+  
+  /* Enhancement for ProfileItem */
+  .profile-card {
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+  
+  .profile-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+  }
+  
+  .profile-header {
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  
+  .profile-avatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #6c63ff;
+  }
+  
+  .profile-name {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.25rem;
+  }
+  
+  .profile-title {
+    color: #6c6c6c;
+    font-size: 0.9rem;
+  }
+  
+  .profile-body {
+    padding: 1.5rem;
+  }
+  
+  .profile-info {
+    margin-bottom: 1rem;
+  }
+  
+  .profile-info-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    color: #555;
+  }
+  
+  .info-icon {
+    margin-right: 0.5rem;
+    color: #6c63ff;
+    font-size: 1rem;
+  }
+  
+  .profile-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+  
+  .skill-tag {
+    background-color: #f0f2ff;
+    color: #6c63ff;
+    padding: 0.35rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+  
+  .profile-footer {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid #f0f0f0;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .view-profile-btn {
+    background-color: #6c63ff;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+  }
+  
+  .view-profile-btn:hover {
+    background-color: #5a52d5;
+  }
