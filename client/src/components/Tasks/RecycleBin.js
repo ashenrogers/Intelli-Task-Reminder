@@ -1,12 +1,13 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
-import { recoverTask, permanentlyDeleteTask } from '../../actions/task'; // we'll write these actions
+import { recoverTask, permanentlyDeleteTask } from '../../actions/task';
 import PropTypes from 'prop-types';
 
 const RecycleBin = ({ task: { deletedTasks }, recoverTask, permanentlyDeleteTask }) => {
   return (
     <Fragment>
       <h1 className="large text-danger">Recycle Bin 🗑️</h1>
+
       {deletedTasks.length > 0 ? (
         <div className="tasks">
           {deletedTasks.map(task => (
