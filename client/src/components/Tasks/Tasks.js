@@ -18,11 +18,10 @@ const Tasks = ({ getTasks, task: { tasks, loading } }) => {
         setSearchTerm(e.target.value);
     };
 
-    const filteredTasks = tasks
-    .filter(task =>
+    const filteredTasks = tasks.filter(task =>
         task.description.toLowerCase().includes(searchTerm.toLowerCase())
-    )
-    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    );
+    
 
 
     return (
