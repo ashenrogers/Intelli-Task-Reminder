@@ -59,30 +59,64 @@ const Tasks = ({ getTasks, task: { tasks, loading } }) => {
                     onChange={handleSearchChange} 
                     className="search-input"
                 /> 
-<button className="btn btn-primary my-1" onClick={() => setShowFilterOptions(!showFilterOptions)}>
-    Filter Tasks
-</button>
+                
+<div className="filter-container">
+    <button className="filter-button" onClick={() => setShowFilterOptions(!showFilterOptions)}>
+        {showFilterOptions ? 'Close Filter' : 'Filter Tasks'}
+    </button>
 
-{showFilterOptions && (
-    <div className="filter-options">
-        <select value={filterType} onChange={(e) => setFilterType(e.target.value)} className="filter-select">
-            <option value="">Select Filter Type</option>
-            <option value="priority">Priority</option>
-            <option value="category">Category</option>
-            <option value="status">Status</option>
-        </select>
+    {showFilterOptions && (
+        <div className="filter-panel">
+            <select
+                value={filterType}
+                onChange={(e) => {
+                    setFilterType(e.target.value);
+                    setFilterValue('');
+                }}
+                className="filter-select"
+            >
+                <option value="">Select Filter Type</option>
+                <option value="priority">Priority</option>
+                <option value="category">Category</option>
+                <option value="status">Status</option>
+            </select>
 
-        {filterType && (
-            <input
-                type="text"
-                placeholder={`Enter ${filterType} to filter`}
-                value={filterValue}
-                onChange={(e) => setFilterValue(e.target.value)}
-                className="filter-input"
-            />
-        )}
-    </div>
-)}
+            {filterType && (
+                <select
+                    value={filterValue}
+                    onChange={(e) => setFilterValue(e.target.value)}
+                    className="filter-select"
+                >
+                    {filterType === 'priority' && (
+                        <>
+                            <option value="">Select Priority</option>
+                            <option value="High">High</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Low">Low</option>
+                        </>
+                    )}
+                    {filterType === 'category' && (
+                        <>
+                            <option value="">Select Category</option>
+                            <option value="Work">Work</option>
+                            <option value="Personal">Personal</option>
+                            <option value="Shopping">Shopping</option>
+                            <option value="Bills">Bills</option>
+                        </>
+                    )}
+                    {filterType === 'status' && (
+                        <>
+                            <option value="">Select Status</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Completed">Completed</option>
+                        </>
+                    )}
+                </select>
+            )}
+        </div>
+    )}
+</div>
+
 
                 
                 <br />
