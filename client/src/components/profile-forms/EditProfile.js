@@ -20,6 +20,15 @@ const EditProfile = ({
     instagram: ""
   });
 
+  const [errors, setErrors] = useState({
+    location: "",
+    age: "",
+    bio: "",
+    twitter: "",
+    facebook: "",
+    instagram: ""
+  });
+
   const [successMessage, setSuccessMessage] = useState("");
   const [displaySocialInputs, toggleSocialInputs] = useState(false);
 
@@ -36,6 +45,44 @@ const EditProfile = ({
     });
   }, [loading, getCurrentProfile]);
 
+  const validateField = (name, value) => {
+    let error = "";
+
+    if (name === "age") {
+      if (!/^\d*$/.test(value)) {
+        error = "Age must be a number";
+      }
+    }
+
+    if (name === "location") {
+      if (value.length < 2) {
+        error = "Location must be at least 2 characters";
+      }
+    }
+
+    if (name === "bio") {
+      if (value.length > 200) {
+        error = "Bio must be less than 200 characters";
+      }
+    }
+
+    if (["twitter", "facebook", "instagram"].includes(name)) {
+      if (value && !/^https?:\/\/.+\..+/.test(value)) {
+        error = "Enter a valid URL";
+      }
+    }
+
+    return error;
+  };
+
+  const onChange = e => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+
+    const error = validateField(name, value);
+    setErrors(prevErrors => ({ ...prevErrors, [name]: error }));
+  };
+
   const onSubmit = e => {
     e.preventDefault();
     createProfile(formData, history, true);
@@ -43,15 +90,12 @@ const EditProfile = ({
     // Show success popup
     setSuccessMessage("Profile updated successfully! 🎉");
 
-    // Hide after 3 seconds
+    // Hide after 2 seconds
     setTimeout(() => {
       setSuccessMessage("");
       history.push("/dashboard");
     }, 2000);
   };
-
-  const onChange = e =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const { location, age, bio, twitter, facebook, instagram } = formData;
 
@@ -69,10 +113,10 @@ const EditProfile = ({
         <p>Let others know more about you</p>
       </div>
 
-      <form className="profile-form" onSubmit={e => onSubmit(e)}>
+      <form className="profile-form" onSubmit={onSubmit}>
         <div className="form-section">
           <h2 className="section-title">Personal Information</h2>
-          
+
           <div className="form-group">
             <label htmlFor="age">Age</label>
             <input
@@ -82,9 +126,10 @@ const EditProfile = ({
               placeholder="Your age"
               name="age"
               value={age}
-              onChange={e => onChange(e)}
+              onChange={onChange}
             />
             <small className="form-text">How old are you?</small>
+            {errors.age && <small style={{ color: "red" }}>{errors.age}</small>}
           </div>
 
           <div className="form-group">
@@ -96,11 +141,12 @@ const EditProfile = ({
               placeholder="Your location"
               name="location"
               value={location}
-              onChange={e => onChange(e)}
+              onChange={onChange}
             />
             <small className="form-text">
               City & province suggested (eg. Colombo, Western)
             </small>
+            {errors.location && <small style={{ color: "red" }}>{errors.location}</small>}
           </div>
 
           <div className="form-group">
@@ -111,9 +157,10 @@ const EditProfile = ({
               placeholder="Tell us about yourself"
               name="bio"
               value={bio}
-              onChange={e => onChange(e)}
+              onChange={onChange}
             ></textarea>
             <small className="form-text">Share a brief introduction about yourself</small>
+            {errors.bio && <small style={{ color: "red" }}>{errors.bio}</small>}
           </div>
         </div>
 
@@ -140,8 +187,9 @@ const EditProfile = ({
                   placeholder="Twitter URL"
                   name="twitter"
                   value={twitter}
-                  onChange={e => onChange(e)}
+                  onChange={onChange}
                 />
+                {errors.twitter && <small style={{ color: "red" }}>{errors.twitter}</small>}
               </div>
 
               <div className="social-input social-facebook">
@@ -152,8 +200,9 @@ const EditProfile = ({
                   placeholder="Facebook URL"
                   name="facebook"
                   value={facebook}
-                  onChange={e => onChange(e)}
+                  onChange={onChange}
                 />
+                {errors.facebook && <small style={{ color: "red" }}>{errors.facebook}</small>}
               </div>
 
               <div className="social-input social-instagram">
@@ -164,8 +213,9 @@ const EditProfile = ({
                   placeholder="Instagram URL"
                   name="instagram"
                   value={instagram}
-                  onChange={e => onChange(e)}
+                  onChange={onChange}
                 />
+                {errors.instagram && <small style={{ color: "red" }}>{errors.instagram}</small>}
               </div>
             </div>
           )}
