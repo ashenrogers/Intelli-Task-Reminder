@@ -55,4 +55,5 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, { deleteTask })(TaskItem);
+export default connect(mapStateToProps, { deleteTask, moveToRecycleBin })(TaskItem);
+
