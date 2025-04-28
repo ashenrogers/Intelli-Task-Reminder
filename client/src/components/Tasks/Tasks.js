@@ -6,6 +6,7 @@ import Spinner from '../layout/Spinner';
 import TaskItem from './TaskItem';
 import { getTasks } from '../../actions/task';
 import { FaMicrophone, FaPen, FaFilePdf } from 'react-icons/fa';
+import { moveToRecycleBin } from '../../actions/task';
 
 const Tasks = ({ getTasks, task: { tasks, loading } }) => {
     const [searchTerm, setSearchTerm] = useState('');
@@ -127,6 +128,10 @@ const Tasks = ({ getTasks, task: { tasks, loading } }) => {
                 <Link className="btn btn-report my-1" to="/task-report">
                     Download Report <FaFilePdf />
                 </Link>
+
+                <button className="btn btn-danger" onClick={() => moveToRecycleBin(task._id)}>
+                Delete 🗑️
+                </button>
 
                 {filteredTasks.length > 0 ? (
                     <div className="tasks">
