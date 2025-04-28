@@ -46,6 +46,7 @@ const EditProfile = ({
     // Hide after 3 seconds
     setTimeout(() => {
       setSuccessMessage("");
+      history.push("/dashboard");
     }, 2000);
   };
 
