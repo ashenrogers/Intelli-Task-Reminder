@@ -3,7 +3,7 @@ import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { createProfile, getCurrentProfile } from "../../actions/profile";
-import './EditProfile.css'; // Import the CSS file
+import "./EditProfile.css"; // Make sure this path is correct
 const EditProfile = ({
   createProfile,
   getCurrentProfile,
