@@ -3,7 +3,8 @@ import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { createProfile, getCurrentProfile } from "../../actions/profile";
-import './EditProfile.css'; // Import the CSS file
+import ''./EditProfile.css'; // Import the new CSS file
+
 const EditProfile = ({
   createProfile,
   getCurrentProfile,
@@ -53,39 +54,46 @@ const EditProfile = ({
   const { location, age, bio, twitter, facebook, instagram } = formData;
 
   return (
-    <Fragment>
+    <div className="edit-profile-container">
       <h1 className="large text-primary">Tell us more about yourself</h1>
       <form className="form" onSubmit={e => onSubmit(e)}>
-        <div className="form-group">
-          <input
-            type="text"
-            placeholder="Age"
-            name="age"
-            value={age}
-            onChange={e => onChange(e)}
-          />
-          <small className="form-text">Age</small>
+        <div className="form-section">
+          <h3 className="form-section-title">Basic Information</h3>
+          <div className="form-group">
+            <input
+              type="text"
+              placeholder="Age"
+              name="age"
+              value={age}
+              onChange={e => onChange(e)}
+            />
+            <small className="form-text">Your age</small>
+          </div>
+          <div className="form-group">
+            <input
+              type="text"
+              placeholder="Location"
+              name="location"
+              value={location}
+              onChange={e => onChange(e)}
+            />
+            <small className="form-text">
+              City & province suggested (eg. Colombo, Western)
+            </small>
+          </div>
         </div>
-        <div className="form-group">
-          <input
-            type="text"
-            placeholder="Location"
-            name="location"
-            value={location}
-            onChange={e => onChange(e)}
-          />
-          <small className="form-text">
-            City & province suggested (eg. Colombo, Western)
-          </small>
-        </div>
-        <div className="form-group">
-          <textarea
-            placeholder="A short bio of yourself"
-            name="bio"
-            value={bio}
-            onChange={e => onChange(e)}
-          ></textarea>
-          <small className="form-text">Tell us a little about yourself</small>
+        
+        <div className="form-section">
+          <h3 className="form-section-title">About You</h3>
+          <div className="form-group">
+            <textarea
+              placeholder="A short bio of yourself"
+              name="bio"
+              value={bio}
+              onChange={e => onChange(e)}
+            ></textarea>
+            <small className="form-text">Tell us a little about yourself</small>
+          </div>
         </div>
 
         <div className="my-2">
@@ -94,12 +102,14 @@ const EditProfile = ({
             type="button"
             className="btn btn-light"
           >
-            Add Social Network Links
+            {displaySocialInputs ? 'Hide Social Links' : 'Add Social Network Links'}
           </button>
           <span>Optional</span>
         </div>
+        
         {displaySocialInputs && (
-          <Fragment>
+          <div className="social-media-container">
+            <h3 className="social-media-title">Connect Your Social Media</h3>
             <div className="form-group social-input">
               <i className="fab fa-twitter fa-2x"></i>
               <input
@@ -131,15 +141,17 @@ const EditProfile = ({
                 onChange={e => onChange(e)}
               />
             </div>
-          </Fragment>
+          </div>
         )}
 
-        <input type="submit" className="btn btn-primary my-1" />
-        <Link className="btn btn-light my-1" to="/dashboard">
-          Go Back
-        </Link>
+        <div className="form-actions">
+          <input type="submit" className="btn btn-primary my-1" value="Save Profile" />
+          <Link className="btn btn-light my-1" to="/dashboard">
+            Go Back
+          </Link>
+        </div>
       </form>
-    </Fragment>
+    </div>
   );
 };
 
