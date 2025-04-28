@@ -510,15 +510,67 @@ button {
   margin-bottom: 0.5rem;
 } 
 
-.filter-options {
-  margin-top: 10px;
+/* Filter Button Styling */
+.filter-container {
+  margin-top: 20px;
+  text-align: left;
 }
 
-.filter-select, .filter-input {
-  margin: 5px 0;
-  padding: 5px;
-  width: 100%;
+.filter-button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
+
+.filter-button:hover {
+  background-color: #45a049;
+  transform: scale(1.05);
+}
+
+/* Filter Panel Styling */
+.filter-panel {
+  margin-top: 10px;
+  padding: 20px;
+  background-color: #f1f1f1;
+  border-radius: 12px;
+  animation: slideDown 0.5s ease forwards;
+}
+
+@keyframes slideDown {
+  0% {
+      opacity: 0;
+      transform: translateY(-20px);
+  }
+  100% {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+.filter-select {
+  width: 100%;
+  padding: 8px 12px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .filter-button {
+      width: 100%;
+  }
+  .filter-select {
+      font-size: 14px;
+  }
+}
+
 
 
 /* Mobile Styles */
