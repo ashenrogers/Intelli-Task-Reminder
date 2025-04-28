@@ -1,4 +1,4 @@
-/* Premium Dashboard.css */
+/* Premium Dashboard.css (Enhanced Version) */
 .dashboard-container {
     max-width: 1100px;
     margin: 2rem auto;
@@ -6,10 +6,10 @@
   }
   
   .dashboard-header {
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-    padding: 2.5rem;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    padding: 2rem 2.5rem;
     margin-bottom: 2rem;
     display: flex;
     align-items: center;
@@ -18,22 +18,22 @@
   
   .header-content h1 {
     font-size: 2.2rem;
-    color: #333;
-    margin-bottom: 0.75rem;
-    font-weight: 600;
+    color: #222;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
   }
   
   .header-content p {
-    font-size: 1.2rem;
-    color: #666;
+    font-size: 1.1rem;
+    color: #777;
     margin: 0;
   }
   
   .user-avatar {
-    width: 80px;
-    height: 80px;
+    width: 75px;
+    height: 75px;
     border-radius: 50%;
-    background-color: #f0f5ff;
+    background: linear-gradient(135deg, #e0e8ff, #f0f5ff);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -48,15 +48,21 @@
   }
   
   .dashboard-card {
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
     padding: 2rem;
     height: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
   }
   
   .dashboard-card-header {
-    border-bottom: 1px solid #eaeaea;
+    border-bottom: 1px solid #f0f0f0;
     padding-bottom: 1rem;
     margin-bottom: 1.5rem;
     display: flex;
@@ -68,13 +74,14 @@
     font-size: 1.4rem;
     color: #333;
     margin: 0;
-    font-weight: 500;
+    font-weight: 600;
   }
   
   .dashboard-card-header .card-action {
     color: #4a90e2;
-    font-weight: 500;
+    font-weight: 600;
     text-decoration: none;
+    font-size: 0.95rem;
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -96,14 +103,14 @@
   }
   
   .chart-stat .total {
-    font-size: 2rem;
-    font-weight: 600;
+    font-size: 2.2rem;
+    font-weight: 700;
     color: #333;
   }
   
   .chart-stat .label {
     font-size: 0.9rem;
-    color: #777;
+    color: #888;
   }
   
   .task-summary {
@@ -120,8 +127,8 @@
   }
   
   .summary-value {
-    font-size: 1.5rem;
-    font-weight: 600;
+    font-size: 1.6rem;
+    font-weight: 700;
   }
   
   .completed {
@@ -142,7 +149,7 @@
   }
   
   .quick-actions h3 {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     color: #555;
     margin-bottom: 1rem;
   }
@@ -160,22 +167,22 @@
     padding: 1rem;
     border-radius: 8px;
     font-size: 1rem;
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.25s ease;
     border: none;
     gap: 0.5rem;
   }
   
   .btn-primary {
     background-color: #4a90e2;
-    color: white;
+    color: #fff;
   }
   
   .btn-primary:hover {
     background-color: #3a7bc8;
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(74, 144, 226, 0.3);
+    box-shadow: 0 6px 18px rgba(74, 144, 226, 0.3);
   }
   
   .btn-outline {
@@ -185,20 +192,20 @@
   }
   
   .btn-outline:hover {
-    background-color: #f8f9fa;
+    background-color: #f9f9f9;
     transform: translateY(-2px);
   }
   
   .btn-danger {
     background-color: #e74c3c;
-    color: white;
-    opacity: 0.9;
+    color: #fff;
+    opacity: 0.95;
   }
   
   .btn-danger:hover {
     opacity: 1;
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+    box-shadow: 0 6px 18px rgba(231, 76, 60, 0.3);
   }
   
   .danger-zone {
@@ -224,7 +231,7 @@
   .profile-progress {
     width: 100%;
     height: 10px;
-    background-color: #f0f0f0;
+    background-color: #f2f2f2;
     border-radius: 5px;
     margin-bottom: 1rem;
     overflow: hidden;
@@ -246,8 +253,8 @@
   
   .no-profile-container {
     background: white;
-    border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
     padding: 3rem;
     text-align: center;
   }
@@ -258,6 +265,7 @@
     margin-bottom: 2rem;
   }
   
+  /* Chart Tooltip */
   .recharts-default-tooltip {
     background-color: rgba(255, 255, 255, 0.95) !important;
     border: none !important;
@@ -279,8 +287,9 @@
       text-align: center;
       gap: 1.5rem;
     }
-    
+  
     .action-buttons {
       grid-template-columns: 1fr;
     }
   }
+  
