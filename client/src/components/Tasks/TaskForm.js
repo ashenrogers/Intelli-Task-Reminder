@@ -19,11 +19,14 @@ const TaskForm = ({ addTask }) => {
     category: ""
   });
 
-  const history = useHistory();  // Hook for navigation
+  const [showModal, setShowModal] = useState(false); // State to manage the modal visibility
+  const history = useHistory(); // Hook for navigation
 
   const onSubmit = e => {
     e.preventDefault();
     addTask(formData);
+
+    // Clear the form
     setFormData({
       description: "",
       due_at: "",
@@ -33,8 +36,8 @@ const TaskForm = ({ addTask }) => {
       category: ""
     });
 
-    // Show success message
-    alert("Task created successfully!");
+    // Show the success modal
+    setShowModal(true);
 
     // Redirect to the tasks page after 2 seconds
     setTimeout(() => {
@@ -127,10 +130,23 @@ const TaskForm = ({ addTask }) => {
           </select>
         </div>
         <input type="submit" className="btn btn-dark" value="Submit" />
-        <Link className="btn go-back" to="/tasks"> 
-          <i className="fas fa-arrow-left"></i> Go Back 
+        <Link className="btn go-back" to="/tasks">
+          <i className="fas fa-arrow-left"></i> Go Back
         </Link>
       </form>
+
+      {/* Success Modal */}
+      {showModal && (
+        <div className="modal-overlay">
+          <div className="modal">
+            <h2>Task Created Successfully!</h2>
+            <p>Your task has been created. You will be redirected to the task list.</p>
+            <div className="modal-footer">
+              <button onClick={() => setShowModal(false)}>Close</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
