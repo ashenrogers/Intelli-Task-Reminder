@@ -39,7 +39,7 @@ const Tasks = ({ getTasks, task: { tasks, loading } }) => {
         }
         return true;
     })
-    .sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+    .sort((a, b) => new Date(a.due_at) - new Date(b.due_at));
 
 
 
