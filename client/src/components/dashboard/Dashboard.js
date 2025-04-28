@@ -1,6 +1,4 @@
 import React, { useEffect, Fragment } from "react";
-import { useState } from "react"; // Make sure you have this at the top if not already
-
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
@@ -20,30 +18,6 @@ const Dashboard = ({
   useEffect(() => {
     getCurrentProfile();
   }, [getCurrentProfile]);
-
-  // Inside your Dashboard component (before return)
-const [formData, setFormData] = useState({
-  age: ''
-});
-const [formErrors, setFormErrors] = useState({
-  age: ''
-});
-
-const handleInputChange = (e) => {
-  const { name, value } = e.target;
-
-  // Validation
-  if (name === "age") {
-    if (!/^\d*$/.test(value)) {
-      setFormErrors(prev => ({ ...prev, age: 'Please enter numbers only' }));
-    } else {
-      setFormErrors(prev => ({ ...prev, age: '' }));
-    }
-  }
-
-  setFormData(prev => ({ ...prev, [name]: value }));
-};
-  
 
   // Calculate completed and incomplete tasks
   const completedTasks = tasks.filter(task => task.completed).length;
