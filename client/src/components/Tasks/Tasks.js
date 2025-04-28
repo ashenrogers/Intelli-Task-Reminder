@@ -9,6 +9,10 @@ import { FaMicrophone, FaPen, FaFilePdf } from 'react-icons/fa';
 
 const Tasks = ({ getTasks, task: { tasks, loading } }) => {
     const [searchTerm, setSearchTerm] = useState('');
+    const [filterType, setFilterType] = useState('');
+    const [filterValue, setFilterValue] = useState('');
+    const [showFilterOptions, setShowFilterOptions] = useState(false);
+
 
     useEffect(() => {
         getTasks();
@@ -19,9 +23,25 @@ const Tasks = ({ getTasks, task: { tasks, loading } }) => {
     };
 
     const filteredTasks = tasks
-    .filter(task =>
+    .filter(task => 
         task.description.toLowerCase().includes(searchTerm.toLowerCase())
     )
+    .filter(task => {
+        if (!filterType || !filterValue) return true;
+
+        if (filterType === 'priority') {
+            return task.priority?.toLowerCase() === filterValue.toLowerCase();
+        } else if (filterType === 'category') {
+            return task.category?.toLowerCase() === filterValue.toLowerCase();
+        } else if (filterType === 'status') {
+            if (filterValue.toLowerCase() === 'completed') {
+                return task.status === 'completed';
+            } else if (filterValue.toLowerCase() === 'incomplete') {
+                return task.status !== 'completed';
+            }
+        }
+        return true;
+    })
     .sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
 
 
@@ -38,6 +58,8 @@ const Tasks = ({ getTasks, task: { tasks, loading } }) => {
                     onChange={handleSearchChange} 
                     className="search-input"
                 /> 
+
+                
                 <br />
                 <Link className="btn btn-dark my-1" to="/create-task">
                     Create Task <FaPen className="pen-icon" />
