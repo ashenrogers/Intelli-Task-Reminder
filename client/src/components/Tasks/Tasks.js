@@ -58,6 +58,30 @@ const Tasks = ({ getTasks, task: { tasks, loading } }) => {
                     onChange={handleSearchChange} 
                     className="search-input"
                 /> 
+<button className="btn btn-primary my-1" onClick={() => setShowFilterOptions(!showFilterOptions)}>
+    Filter Tasks
+</button>
+
+{showFilterOptions && (
+    <div className="filter-options">
+        <select value={filterType} onChange={(e) => setFilterType(e.target.value)} className="filter-select">
+            <option value="">Select Filter Type</option>
+            <option value="priority">Priority</option>
+            <option value="category">Category</option>
+            <option value="status">Status</option>
+        </select>
+
+        {filterType && (
+            <input
+                type="text"
+                placeholder={`Enter ${filterType} to filter`}
+                value={filterValue}
+                onChange={(e) => setFilterValue(e.target.value)}
+                className="filter-input"
+            />
+        )}
+    </div>
+)}
 
                 
                 <br />
