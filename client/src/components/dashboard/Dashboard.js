@@ -18,6 +18,7 @@ const Dashboard = ({
   useEffect(() => {
     getCurrentProfile();
   }, [getCurrentProfile]);
+  
 
   // Calculate completed and incomplete tasks
   const completedTasks = tasks.filter(task => task.completed).length;
