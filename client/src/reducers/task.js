@@ -10,6 +10,7 @@ import {
 const initialState = {
     task:null,
     tasks:[],
+    deletedTasks: [],
     loading:true,
     error:{}
 
