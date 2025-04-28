@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { createProfile, getCurrentProfile } from "../../actions/profile";
 import "./EditProfile.css"; // Make sure this path is correct
+
 const EditProfile = ({
   createProfile,
   getCurrentProfile,
@@ -19,22 +20,7 @@ const EditProfile = ({
     instagram: ""
   });
 
-  const onSubmit = e => {
-    e.preventDefault();
-    createProfile(formData, history, true);
-    setFormData({
-      location: "",
-      age: "",
-      bio: "",
-      twitter: "",
-      facebook: "",
-      instagram: ""
-    });
-  };
-
-  const onChange = e =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-
+  const [successMessage, setSuccessMessage] = useState("");
   const [displaySocialInputs, toggleSocialInputs] = useState(false);
 
   useEffect(() => {
@@ -48,14 +34,48 @@ const EditProfile = ({
       facebook: loading || !profile.facebook ? "" : profile.facebook,
       instagram: loading || !profile.instagram ? "" : profile.instagram
     });
-  }, []);
+  }, [loading, getCurrentProfile]); // Note the dependencies added
+
+  const onSubmit = e => {
+    e.preventDefault();
+    createProfile(formData, history, true);
+
+    // Show success popup
+    setSuccessMessage("Profile updated successfully! 🎉");
+
+    // Hide after 3 seconds
+    setTimeout(() => {
+      setSuccessMessage("");
+    }, 3000);
+
+    setFormData({
+      location: "",
+      age: "",
+      bio: "",
+      twitter: "",
+      facebook: "",
+      instagram: ""
+    });
+  };
+
+  const onChange = e =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const { location, age, bio, twitter, facebook, instagram } = formData;
 
   return (
     <Fragment>
       <h1 className="large text-primary">Tell us more about yourself</h1>
+
+      {/* Success Message Popup */}
+      {successMessage && (
+        <div className="popup-success">
+          {successMessage}
+        </div>
+      )}
+
       <form className="form" onSubmit={e => onSubmit(e)}>
+        {/* Your existing fields here */}
         <div className="form-group">
           <input
             type="text"
@@ -66,6 +86,7 @@ const EditProfile = ({
           />
           <small className="form-text">Age</small>
         </div>
+
         <div className="form-group">
           <input
             type="text"
@@ -78,6 +99,7 @@ const EditProfile = ({
             City & province suggested (eg. Colombo, Western)
           </small>
         </div>
+
         <div className="form-group">
           <textarea
             placeholder="A short bio of yourself"
@@ -98,6 +120,7 @@ const EditProfile = ({
           </button>
           <span>Optional</span>
         </div>
+
         {displaySocialInputs && (
           <Fragment>
             <div className="form-group social-input">
@@ -121,6 +144,7 @@ const EditProfile = ({
                 onChange={e => onChange(e)}
               />
             </div>
+
             <div className="form-group social-input">
               <i className="fab fa-instagram fa-2x"></i>
               <input
