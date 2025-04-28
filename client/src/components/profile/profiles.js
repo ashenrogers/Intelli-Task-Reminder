@@ -6,6 +6,7 @@ import ProfileItem from './ProfileItem';
 import { getProfiles } from '../../actions/profile';
 import './profiles.css'; // Import the CSS file
 
+
 const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
   const [searchTerm, setSearchTerm] = useState('');
 
