@@ -35,7 +35,7 @@ const Tasks = ({ getTasks, task: { tasks, loading } }) => {
         } else if (filterType === 'category') {
             return task.category?.toLowerCase() === filterValue.toLowerCase();
         } else if (filterType === 'status') {
-            return task.status?.toLowerCase() === filterValue.toLowerCase();
+            return task.completed?.toLowerCase() === filterValue.toLowerCase();
         }
         return true;
     })
@@ -59,7 +59,7 @@ const Tasks = ({ getTasks, task: { tasks, loading } }) => {
 
 <div className="filter-container">
     <button className="filter-button" onClick={() => setShowFilterOptions(!showFilterOptions)}>
-        {showFilterOptions ? 'Close Filter' : 'Filter Tasks'}
+    {showFilterOptions ? 'Close Filter 🔍' : 'Filter Tasks 🔍'}
     </button>
 
     {showFilterOptions && (
@@ -104,8 +104,8 @@ const Tasks = ({ getTasks, task: { tasks, loading } }) => {
                     {filterType === 'status' && (
                         <>
                             <option value="">Select Status</option>
-                            <option value="Pending">Pending</option>
-                            <option value="Completed">Completed</option>
+                            <option value="Pending ⏳">Pending</option>
+                            <option value="Completed ✅">Completed</option>
                         </>
                     )}
                 </select>
