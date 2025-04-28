@@ -168,38 +168,31 @@ img {
   color: #333;
 }
 
-.btn-dark{
+.btn-dark {
   background: linear-gradient(to right, #f8f9fa, #689cbe);
-    border-radius: 5px; 
-    border: none;
-    cursor: pointer;
-    font-size: 1.2rem;
-    font-family: inherit;
-    transition: all 0.2s ease;
-    display: flex;
-    align-items: left;
-    justify-content: center;
-    margin-right: 0.5rem;
-    transition: opacity 0.2s ease-in;
-    display: inline-block;
-    padding: 0.4rem 1.3rem;
-    outline: none;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem 1.3rem;
+  outline: none;
 }
 
-.microphone-icon {
-  font-size: 1.5rem;
-  color: #333;
-}
-
-.pen-icon{
-  font-size: 1.5rem;
-  color: #333;
-}
 .btn-dark:hover {
-  background-color: rgba(42, 72, 115, 0.1);
-    color: var(--accent-color);
+  background: linear-gradient(to right, #e9ecef, #4d7ea7);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+.btn-icon {
+  margin-right: 8px;
+  font-size: 1.2rem;
+}
 
 .bg-dark,
 .badge-dark,
@@ -214,21 +207,36 @@ img {
 .alert-danger {
   background: var(--danger-color);
   color: #fff;
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
 }
 
-.btn-report{
+.btn-danger:hover {
+  background: #c82333;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  opacity: 1;
+}
+
+.btn-report {
   background: var(--success-color);
   color: #fff;
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-family: inherit;
-  transition: all 0.2s ease;
-  align-items: right;
-  justify-content: center;
-  margin-left: 40%;
-  margin-bottom: 1%;
-  
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  padding: 0.6rem 1.3rem;
+  transition: all 0.3s ease;
 }
 
+.btn-report:hover {
+  background: #218838;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  opacity: 1;
+}
 
 .btn-success,
 .bg-success,
@@ -450,53 +458,70 @@ button {
 }
 
 /* Tasks Page */
-
-.search-container {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
+.search-filter-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 20px;
 }
 
 .search-input {
-    width: 100%;
-    max-width: 500px;
-    padding: 12px 15px;
-    border: 2px solid #2980b9;
-    border-radius: 25px;
-    font-size: 16px;
-    outline: none;
-    transition: all 0.3s ease-in-out;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid #2980b9;
+  border-radius: 25px;
+  font-size: 16px;
+  outline: none;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .search-input:focus {
-    border-color: #2c3e50;
-    box-shadow: 0px 4px 8px rgba(0, 91, 187, 0.4);
+  border-color: #2c3e50;
+  box-shadow: 0px 4px 8px rgba(0, 91, 187, 0.4);
 }
 
 .search-input::placeholder {
-    color: #6c757d;
-    font-style: italic;
+  color: #6c757d;
+  font-style: italic;
 }
 
-@media (max-width: 600px) {
-    .search-input {
-        width: 90%;
-    }
+/* Task Buttons Container */
+.task-buttons-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+  flex-wrap: wrap;
 }
 
+.task-action-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
 
- .task {
+.task-action-buttons .btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  margin-bottom: 10px;
+}
+
+.report-button {
+  margin-left: auto;
+}
+
+.task {
   display: flex;
   flex-direction: column;
-  background:linear-gradient(to right, #f8f9fa, #689cbe);
-  border-radius: 5px;
+  background: linear-gradient(to right, #f8f9fa, #689cbe);
+  border-radius: 15px;
   padding: 20px;
   margin: 5px 0px;
-  border-radius: 15px;
-    box-shadow: var(--box-shadow);
-    padding: 20px;
-    transition: var(--transition);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 }
 
 .task-item:hover {
@@ -512,8 +537,7 @@ button {
 
 /* Filter Button Styling */
 .filter-container {
-  margin-top: 20px;
-  text-align: left;
+  width: 100%;
 }
 
 .filter-button {
@@ -525,6 +549,7 @@ button {
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
+  width: auto;
 }
 
 .filter-button:hover {
@@ -539,42 +564,57 @@ button {
   background-color: #f1f1f1;
   border-radius: 12px;
   animation: slideDown 0.5s ease forwards;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 @keyframes slideDown {
   0% {
-      opacity: 0;
-      transform: translateY(-20px);
+    opacity: 0;
+    transform: translateY(-20px);
   }
   100% {
-      opacity: 1;
-      transform: translateY(0);
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
 .filter-select {
   width: 100%;
-  padding: 8px 12px;
+  padding: 10px 12px;
   margin-top: 10px;
   border: 1px solid #ccc;
   border-radius: 8px;
   font-size: 16px;
+  background-color: white;
 }
 
-/* Responsive */
-@media (max-width: 600px) {
-  .filter-button {
-      width: 100%;
-  }
-  .filter-select {
-      font-size: 14px;
-  }
+.filter-select:focus {
+  border-color: #4CAF50;
+  outline: none;
 }
 
+/* Tasks List */
+.tasks {
+  margin-top: 20px;
+}
 
+/* Task delete style */
+.task-card.deleted {
+  background: #ffe6e6;
+  border: 1px solid #ff4d4d;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+.task-card.deleted:hover {
+  background: #ffcccc;
+  transform: scale(1.02);
+}
 
 /* Mobile Styles */
-@media (max-width: 700px) {
+@media (max-width: 768px) {
   .container {
     margin-top: 8rem;
   }
@@ -596,6 +636,28 @@ button {
     font-size: 1rem;
   }
 
+  .task-buttons-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .task-action-buttons {
+    flex-direction: column;
+  }
+  
+  .report-button {
+    margin-top: 10px;
+    margin-left: 0;
+  }
+  
+  .search-input {
+    width: 100%;
+  }
+  
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
   
   /* Profiles Page */
   .profile {
@@ -608,7 +670,6 @@ button {
   }
 
   /* Profile Page */
-
   .profile-top img,
   .profile img {
     width: 200px;
@@ -627,25 +688,4 @@ button {
   .dash-buttons a {
     margin-bottom: 0.2rem;
   }
-  
 }
-
-/* task delete style */
-.task-card.deleted {
-  background: #ffe6e6;
-  border: 1px solid #ff4d4d;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  border-radius: 10px;
-  transition: 0.3s;
-}
-
-.task-card.deleted:hover {
-  background: #ffcccc;
-  transform: scale(1.02);
-}
-
-.btn-success {
-  margin-right: 1rem;
-}
-
