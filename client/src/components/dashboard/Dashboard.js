@@ -130,7 +130,7 @@ const Dashboard = ({
             <div className="quick-actions">
               <h3>Quick Actions</h3>
               <div className="action-buttons">
-                <Link to="/add-task" className="btn btn-primary">
+                <Link to="/create-task" className="btn btn-primary">
                   <i className="fas fa-plus"></i> New Task
                 </Link>
                 <Link to="/edit-profile" className="btn btn-outline">
