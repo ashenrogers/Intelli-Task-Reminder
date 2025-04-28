@@ -35,15 +35,12 @@ const Tasks = ({ getTasks, task: { tasks, loading } }) => {
         } else if (filterType === 'category') {
             return task.category?.toLowerCase() === filterValue.toLowerCase();
         } else if (filterType === 'status') {
-            if (filterValue.toLowerCase() === 'completed') {
-                return task.status === 'completed';
-            } else if (filterValue.toLowerCase() === 'incomplete') {
-                return task.status !== 'completed';
-            }
+            return task.status?.toLowerCase() === filterValue.toLowerCase();
         }
         return true;
     })
     .sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+
 
 
 
@@ -59,7 +56,7 @@ const Tasks = ({ getTasks, task: { tasks, loading } }) => {
                     onChange={handleSearchChange} 
                     className="search-input"
                 /> 
-                
+
 <div className="filter-container">
     <button className="filter-button" onClick={() => setShowFilterOptions(!showFilterOptions)}>
         {showFilterOptions ? 'Close Filter' : 'Filter Tasks'}
