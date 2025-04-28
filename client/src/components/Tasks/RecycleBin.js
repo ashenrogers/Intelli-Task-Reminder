@@ -11,12 +11,12 @@ const RecycleBin = ({ task: { deletedTasks }, recoverTask, permanentlyDeleteTask
       {deletedTasks.length > 0 ? (
         <div className="tasks">
           {deletedTasks.map(task => (
-            <div key={_id} className="task-card deleted">
+            <div key={task._id} className="task-card deleted">
               <h3>{task.description}</h3>
-              <button className="btn btn-success" onClick={() => recoverTask(_id)}>
+              <button className="btn btn-success" onClick={() => recoverTask(task._id)}>
                 Recover ♻️
               </button>
-              <button className="btn btn-danger" onClick={() => permanentlyDeleteTask(_id)}>
+              <button className="btn btn-danger" onClick={() => permanentlyDeleteTask(task._id)}>
                 Delete Permanently ❌
               </button>
             </div>

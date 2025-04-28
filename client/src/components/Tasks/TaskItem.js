@@ -3,11 +3,11 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import Moment from "react-moment";
 import { connect } from "react-redux";
-import { deleteTask } from "../../actions/task";
-import { moveToRecycleBin } from "../../actions/task";
+import { deleteTask, moveToRecycleBin } from "../../actions/task";
 
 const TaskItem = ({
   deleteTask,
+  moveToRecycleBin,
   task: { _id, due_at, time, date, description, completed, toBeReminded, priority, category }
 }) => {
   return (
@@ -20,7 +20,7 @@ const TaskItem = ({
         <b>Due by:</b> <Moment format="DD/MM/YYYY">{due_at}</Moment> at {time}
       </p>
       <p>
-        <b>Priority:</b> <span className={`priority-${priority.toLowerCase()}`}>{priority}</span>
+        <b>Priority:</b> <span className={`priority-${priority?.toLowerCase()}`}>{priority}</span>
       </p>
       <p>
         <b>Category:</b> {category}
@@ -38,7 +38,7 @@ const TaskItem = ({
           </Link>
         )}
         <button className="btn btn-danger" onClick={() => moveToRecycleBin(_id)}>
-         Delete 🗑️
+          Delete 🗑️
         </button>
       </div>
     </div>
@@ -48,12 +48,12 @@ const TaskItem = ({
 TaskItem.propTypes = {
   task: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
-  deleteTask: PropTypes.func.isRequired
+  deleteTask: PropTypes.func.isRequired,
+  moveToRecycleBin: PropTypes.func.isRequired
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   auth: state.auth
 });
 
 export default connect(mapStateToProps, { deleteTask, moveToRecycleBin })(TaskItem);
-
