@@ -46,6 +46,7 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </section>
+          <br></br>
 
           <section className="profiles-grid">
             {filteredProfiles.length > 0 ? (
