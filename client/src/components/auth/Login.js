@@ -4,54 +4,80 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import './Login.css';
 import { login } from '../../actions/auth';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = ({ login, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
-  
+
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
-  
+
   const { email, password } = formData;
-  
+
   const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
-  
+
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
-  
+
   const toggleRememberMe = () => {
     setRememberMe(!rememberMe);
   };
-  
+
+  const validateEmail = email => {
+    return /\S+@\S+\.\S+/.test(email);
+  };
+
   const onSubmit = async e => {
     e.preventDefault();
+
+    if (!validateEmail(email)) {
+      toast.error('Invalid email format (must include @ and domain)');
+      return;
+    }
+
+    if (password.length < 6) {
+      toast.error('Password must be at least 6 characters long');
+      return;
+    }
+
     setIsLoading(true);
     try {
-      await login(email, password, rememberMe);
+      const result = await login(email, password, rememberMe);
+      // Check result if login returns a promise with status
+      if (result && result.success) {
+        toast.success('Successfully logged in!');
+      } else {
+        toast.error('Invalid email or password');
+      }
+    } catch (err) {
+      toast.error('Login failed. Please try again.');
     } finally {
       setIsLoading(false);
     }
   };
 
-  // Redirect if authenticated
   if (isAuthenticated) {
+    toast.dismiss(); // Close all toasts
     return <Redirect to="/dashboard" />;
   }
 
   return (
     <div className="login-page">
+      <ToastContainer />
       <div className="login-container">
         <div className="login-card">
           <div className="login-header">
             <h1 className="login-title">Welcome Back</h1>
             <p className="login-subtitle">Sign in to your account</p>
           </div>
-          
-          <form className="login-form" onSubmit={e => onSubmit(e)}>
+
+          <form className="login-form" onSubmit={onSubmit}>
             <div className="form-group">
               <label htmlFor="email" className="form-label">Email Address</label>
               <div className="input-group">
@@ -64,14 +90,14 @@ const Login = ({ login, isAuthenticated }) => {
                   placeholder="Enter your email"
                   name="email"
                   value={email}
-                  onChange={e => onChange(e)}
+                  onChange={onChange}
                   required
                   className="form-input"
                   autoComplete="email"
                 />
               </div>
             </div>
-            
+
             <div className="form-group">
               <div className="password-header">
                 <label htmlFor="password" className="form-label">Password</label>
@@ -85,12 +111,12 @@ const Login = ({ login, isAuthenticated }) => {
                 </span>
                 <input
                   id="password"
-                  type={passwordVisible ? "text" : "password"}
+                  type={passwordVisible ? 'text' : 'password'}
                   placeholder="Enter your password"
                   name="password"
                   minLength="6"
                   value={password}
-                  onChange={e => onChange(e)}
+                  onChange={onChange}
                   required
                   className="form-input"
                   autoComplete="current-password"
@@ -99,18 +125,18 @@ const Login = ({ login, isAuthenticated }) => {
                   type="button"
                   className="password-toggle"
                   onClick={togglePasswordVisibility}
-                  aria-label={passwordVisible ? "Hide password" : "Show password"}
+                  aria-label={passwordVisible ? 'Hide password' : 'Show password'}
                 >
-                  <i className={passwordVisible ? "eye-slash-icon" : "eye-icon"}></i>
+                  <i className={passwordVisible ? 'eye-slash-icon' : 'eye-icon'}></i>
                 </button>
               </div>
             </div>
-            
+
             <div className="form-group remember-me-group">
               <label className="checkbox-container">
-                <input 
-                  type="checkbox" 
-                  checked={rememberMe} 
+                <input
+                  type="checkbox"
+                  checked={rememberMe}
                   onChange={toggleRememberMe}
                   className="remember-checkbox"
                 />
@@ -118,7 +144,7 @@ const Login = ({ login, isAuthenticated }) => {
                 <span className="checkbox-label">Remember me</span>
               </label>
             </div>
-            
+
             <div className="form-group">
               <button
                 type="submit"
@@ -129,11 +155,11 @@ const Login = ({ login, isAuthenticated }) => {
               </button>
             </div>
           </form>
-          
+
           <div className="login-divider">
             <span className="divider-text">or continue with</span>
           </div>
-          
+
           <div className="social-login">
             <button type="button" className="social-button google-button">
               <i className="google-icon"></i>
@@ -144,7 +170,7 @@ const Login = ({ login, isAuthenticated }) => {
               <span>Facebook</span>
             </button>
           </div>
-          
+
           <div className="login-footer">
             <p className="signup-link">
               Don't have an account? <Link to="/register" className="auth-link">Sign Up</Link>
