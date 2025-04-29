@@ -60,24 +60,20 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
           </div>
           
           <form className="register-form" onSubmit={e => onSubmit(e)}>
-            <div className="form-group">
-              <label htmlFor="name" className="form-label">Full Name</label>
-              <div className="input-group">
-                <span className="input-icon">
-                  <i className="user-icon"></i>
-                </span>
-                <input
-                  id="name"
-                  type="text"
-                  placeholder="Enter your full name"
-                  name="name"
-                  value={name}
-                  onChange={e => onChange(e)}
-                  required
-                  className="form-input"
-                />
-              </div>
-            </div>
+          <div class="form-group">
+  <label class="form-label" for="fullName">Full Name</label>
+  <div class="input-group">
+    <span class="input-icon user-icon"></span>
+    <input
+      type="text"
+      id="fullName"
+      name="fullName"
+      class="form-input"
+      placeholder="Enter your full name"
+      required
+    />
+  </div>
+</div>
             
             <div className="form-group">
               <label htmlFor="email" className="form-label">Email Address</label>
