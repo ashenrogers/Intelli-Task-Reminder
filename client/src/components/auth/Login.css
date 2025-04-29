@@ -438,6 +438,13 @@ body {
   color: var(--facebook-color);
 }
 
+.error-text {
+    color: red;
+    font-size: 0.85rem;
+    margin-top: 4px;
+  }
+  
+
 /* Responsive styles */
 @media (max-width: 576px) {
   .login-container {
