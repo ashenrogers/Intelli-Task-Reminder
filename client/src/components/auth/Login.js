@@ -80,6 +80,8 @@ const Login = ({ login, isAuthenticated }) => {
     onError: () => toast.error('Google login failed.')
   });
 
+  
+
   if (isAuthenticated) {
     toast.dismiss();
     return <Redirect to="/dashboard" />;
