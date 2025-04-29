@@ -1,329 +1,135 @@
-/* Register.css - Modern & Responsive Styles */
+/* Register.css - Old School Simple UI */
 
-/* Import fonts */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
-/* Font Awesome icons */
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
-
-/* Root variables */
-:root {
-  --primary-color: #4f46e5;
-  --primary-hover: #4338ca;
-  --danger-color: #ef4444;
-  --success-color: #10b981;
-  --background-color: #f9fafb;
-  --card-color: #ffffff;
-  --text-color: #1f2937;
-  --text-light: #6b7280;
-  --border-color: #e5e7eb;
-  --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  --border-radius: 0.5rem;
-  --input-height: 3rem;
-  --transition: all 0.3s ease;
-}
-
-/* Global styles */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
+/* No fancy fonts */
 body {
-  font-family: 'Inter', sans-serif;
-  color: var(--text-color);
-  background-color: var(--background-color);
-  line-height: 1.5;
-}
-
-/* Register page layout */
-.register-page {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem 1rem;
-  background-color: var(--background-color);
-}
-
-.register-container {
-  width: 100%;
-  max-width: 480px;
-}
-
-/* Card style */
-.register-card {
-  background-color: var(--card-color);
-  border-radius: var(--border-radius);
-  box-shadow: var(--shadow);
-  overflow: hidden;
-  width: 100%;
-}
-
-/* Header section */
-.register-header {
-  padding: 2rem 2rem 1rem;
-  text-align: center;
-}
-
-.register-title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--text-color);
-  margin-bottom: 0.5rem;
-}
-
-.register-subtitle {
-  color: var(--text-light);
-  font-size: 0.875rem;
-}
-
-/* Form styles */
-.register-form {
-  padding: 1rem 2rem 2rem;
-}
-
-.form-group {
-  margin-bottom: 1.25rem;
-}
-
-.form-label {
-  display: block;
-  font-size: 0.875rem;
-  font-weight: 500;
-  margin-bottom: 0.5rem;
-  color: var(--text-color);
-}
-
-.input-group {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.input-icon {
-  position: absolute;
-  left: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--text-light);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.form-input {
-  width: 100%;
-  height: var(--input-height);
-  padding: 0 1rem 0 2.5rem;
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius);
-  font-size: 0.875rem;
-  color: var(--text-color);
-  transition: var(--transition);
-  background-color: var(--card-color);
-}
-
-.form-input:focus {
-  border-color: var(--primary-color);
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
-}
-
-.form-input::placeholder {
-  color: var(--text-light);
-  opacity: 0.7;
-}
-
-.password-hint {
-  font-size: 0.75rem;
-  color: var(--text-light);
-  margin-top: 0.25rem;
-  display: block;
-}
-
-.password-toggle {
-  position: absolute;
-  right: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  color: var(--text-light);
-  font-size: 0.875rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.25rem;
-  transition: var(--transition);
-}
-
-.password-toggle:hover {
-  color: var(--primary-color);
-}
-
-/* Button styles */
-.register-button {
-  width: 100%;
-  height: var(--input-height);
-  background-color: var(--primary-color);
-  border: none;
-  border-radius: var(--border-radius);
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
-  transition: var(--transition);
-  font-size: 0.875rem;
-  text-transform: uppercase;
-  letter-spacing: 0.025em;
-}
-
-.register-button:hover:not(:disabled) {
-  background-color: var(--primary-hover);
-}
-
-.register-button:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.4);
-}
-
-.register-button:disabled {
-  opacity: 0.7;
-  cursor: not-allowed;
-}
-
-.register-button.loading {
-  position: relative;
-  padding-left: 2rem;
-}
-
-.register-button.loading:before {
-  content: '';
-  position: absolute;
-  left: calc(50% - 3rem);
-  top: 50%;
-  transform: translateY(-50%);
-  width: 1rem;
-  height: 1rem;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  border-top-color: white;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  to {
-    transform: translateY(-50%) rotate(360deg);
+    font-family: Arial, sans-serif;
+    color: #333;
+    background-color: #f2f2f2;
   }
-}
-
-/* Footer section */
-.register-footer {
-  padding: 1.5rem 2rem;
-  text-align: center;
-  background-color: rgba(249, 250, 251, 0.5);
-  border-top: 1px solid var(--border-color);
-}
-
-.login-link {
-  font-size: 0.875rem;
-  color: var(--text-light);
-}
-
-.auth-link {
-  color: var(--primary-color);
-  font-weight: 500;
-  text-decoration: none;
-  transition: var(--transition);
-}
-
-.auth-link:hover {
-  color: var(--primary-hover);
-  text-decoration: underline;
-}
-
-/* Icons */
-.user-icon:before {
-  font-family: "Font Awesome 6 Free";
-  content: "\f007";
-  font-weight: 900;
-}
-
-.email-icon:before {
-  font-family: "Font Awesome 6 Free";
-  content: "\f0e0";
-  font-weight: 900;
-}
-
-.lock-icon:before {
-  font-family: "Font Awesome 6 Free";
-  content: "\f023";
-  font-weight: 900;
-}
-
-.eye-icon:before {
-  font-family: "Font Awesome 6 Free";
-  content: "\f06e";
-  font-weight: 900;
-}
-
-.eye-slash-icon:before {
-  font-family: "Font Awesome 6 Free";
-  content: "\f070";
-  font-weight: 900;
-}
-
-/* Responsive styles */
-@media (max-width: 576px) {
+  
+  /* Global styles */
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Layout */
+  .register-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    background-color: #f2f2f2;
+  }
+  
   .register-container {
-    max-width: 100%;
+    width: 100%;
+    max-width: 400px;
   }
   
   .register-card {
-    border-radius: 0;
-    box-shadow: none;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    padding: 2rem;
+    width: 100%;
   }
   
-  .register-header,
-  .register-form {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-  }
-  
-  .register-footer {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-  }
-}
-
-/* Tablet and larger screens */
-@media (min-width: 768px) {
-  .register-container {
-    max-width: 480px;
+  /* Header */
+  .register-header {
+    text-align: center;
+    margin-bottom: 1rem;
   }
   
   .register-title {
-    font-size: 1.75rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 0.5rem;
   }
-}
-
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background-color: #111827;
-    --card-color: #1f2937;
-    --text-color: #f9fafb;
-    --text-light: #d1d5db;
-    --border-color: #374151;
+  
+  .register-subtitle {
+    font-size: 0.9rem;
+    color: #666;
+  }
+  
+  /* Form */
+  .register-form {
+    margin-top: 1rem;
+  }
+  
+  .form-group {
+    margin-bottom: 1rem;
+  }
+  
+  .form-label {
+    display: block;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    color: #333;
   }
   
   .form-input {
-    background-color: #1f2937;
+    width: 100%;
+    height: 2.5rem;
+    padding: 0 0.75rem;
+    border: 1px solid #ccc;
+    font-size: 0.9rem;
+    background-color: #fff;
   }
   
-  .register-footer {
-    background-color: rgba(31, 41, 55, 0.5);
+  .form-input:focus {
+    border-color: #333;
+    outline: none;
   }
-}
+  
+  /* Password hint */
+  .password-hint {
+    font-size: 0.75rem;
+    color: #999;
+    margin-top: 0.25rem;
+  }
+  
+  /* Button */
+  .register-button {
+    width: 100%;
+    height: 2.5rem;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .register-button:hover {
+    background-color: #45a049;
+  }
+  
+  /* Footer */
+  .register-footer {
+    margin-top: 1.5rem;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #666;
+  }
+  
+  .auth-link {
+    color: #4CAF50;
+    text-decoration: none;
+  }
+  
+  .auth-link:hover {
+    text-decoration: underline;
+  }
+  
+  /* Responsive */
+  @media (max-width: 576px) {
+    .register-container {
+      padding: 1rem;
+    }
+  }
+  
+  /* Removed fancy loading spinner, icons, transitions, dark mode, etc. */
+  
