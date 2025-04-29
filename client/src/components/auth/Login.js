@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import './Login.css';
 import { login } from '../../actions/auth';
 
@@ -12,7 +10,7 @@ const Login = ({ login, isAuthenticated }) => {
     email: '',
     password: ''
   });
-
+  
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
@@ -20,46 +18,20 @@ const Login = ({ login, isAuthenticated }) => {
   const { email, password } = formData;
   
   const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
-
+  
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
-
+  
   const toggleRememberMe = () => {
     setRememberMe(!rememberMe);
   };
-
-  const validateEmail = (email) => {
-    // Simple email validation
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email);
-  };
-
-  const validatePassword = (password) => {
-    // Minimum 6 characters (you can make it stronger if needed)
-    return password.length >= 6;
-  };
-
+  
   const onSubmit = async e => {
     e.preventDefault();
-
-    // Frontend Validations
-    if (!validateEmail(email)) {
-      toast.error('Please enter a valid email address (e.g., example@mail.com)');
-      return;
-    }
-
-    if (!validatePassword(password)) {
-      toast.error('Password must be at least 6 characters long');
-      return;
-    }
-
     setIsLoading(true);
     try {
       await login(email, password, rememberMe);
-      toast.success('Logged in successfully!');
-    } catch (err) {
-      toast.error('Incorrect email or password');
     } finally {
       setIsLoading(false);
     }
@@ -72,8 +44,6 @@ const Login = ({ login, isAuthenticated }) => {
 
   return (
     <div className="login-page">
-      <ToastContainer position="top-center" autoClose={3000} />
-      
       <div className="login-container">
         <div className="login-card">
           <div className="login-header">
@@ -81,7 +51,7 @@ const Login = ({ login, isAuthenticated }) => {
             <p className="login-subtitle">Sign in to your account</p>
           </div>
           
-          <form className="login-form" onSubmit={onSubmit}>
+          <form className="login-form" onSubmit={e => onSubmit(e)}>
             <div className="form-group">
               <label htmlFor="email" className="form-label">Email Address</label>
               <div className="input-group">
@@ -94,7 +64,7 @@ const Login = ({ login, isAuthenticated }) => {
                   placeholder="Enter your email"
                   name="email"
                   value={email}
-                  onChange={onChange}
+                  onChange={e => onChange(e)}
                   required
                   className="form-input"
                   autoComplete="email"
@@ -120,7 +90,7 @@ const Login = ({ login, isAuthenticated }) => {
                   name="password"
                   minLength="6"
                   value={password}
-                  onChange={onChange}
+                  onChange={e => onChange(e)}
                   required
                   className="form-input"
                   autoComplete="current-password"
