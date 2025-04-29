@@ -439,10 +439,26 @@ body {
 }
 
 .error-text {
-    color: red;
-    font-size: 0.85rem;
-    margin-top: 4px;
+    color: #e63946; /* a soft premium red */
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-top: 6px;
+    margin-left: 2px;
+    padding-left: 8px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    transition: all 0.2s ease-in-out;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
+  
+  .error-text::before {
+    content: "⚠ ";
+    margin-right: 6px;
+    font-size: 1rem;
+    line-height: 1;
+  }
+  
   
 
 /* Responsive styles */
