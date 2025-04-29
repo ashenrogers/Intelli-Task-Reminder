@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 import { setAlert } from "../../actions/alert";
-import { register } from "../../actions/auth";
+import { register, socialLogin } from "../../actions/auth"; // Updated import
 import PropTypes from "prop-types";
 import './Register.css';
 
-const Register = ({ setAlert, register, isAuthenticated }) => {
+const Register = ({ setAlert, register, socialLogin, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -17,6 +17,10 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [socialLoading, setSocialLoading] = useState({
+    google: false,
+    facebook: false
+  });
   
   const { name, email, password, password2 } = formData;
   
@@ -34,6 +38,17 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
       } finally {
         setIsLoading(false);
       }
+    }
+  };
+
+  const handleSocialLogin = async (provider) => {
+    setSocialLoading({ ...socialLoading, [provider]: true });
+    try {
+      await socialLogin(provider);
+    } catch (error) {
+      setAlert(`${provider} authentication failed`, "danger");
+    } finally {
+      setSocialLoading({ ...socialLoading, [provider]: false });
     }
   };
 
@@ -59,9 +74,40 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             <p className="register-subtitle">Join our community today</p>
           </div>
           
+          {/* Social Login Options */}
+          <div className="social-login-container">
+            <div className="social-login-divider">
+              <span>Sign up with</span>
+            </div>
+            
+            <div className="social-buttons">
+              <button 
+                type="button" 
+                className={`social-button google ${socialLoading.google ? 'loading' : ''}`}
+                onClick={() => handleSocialLogin('google')}
+                disabled={socialLoading.google}
+              >
+                <i className="google-icon"></i>
+                {socialLoading.google ? 'Connecting...' : 'Google'}
+              </button>
+              
+              <button 
+                type="button" 
+                className={`social-button facebook ${socialLoading.facebook ? 'loading' : ''}`}
+                onClick={() => handleSocialLogin('facebook')}
+                disabled={socialLoading.facebook}
+              >
+                <i className="facebook-icon"></i>
+                {socialLoading.facebook ? 'Connecting...' : 'Facebook'}
+              </button>
+            </div>
+            
+            <div className="social-login-divider">
+              <span>Or sign up with email</span>
+            </div>
+          </div>
+          
           <form className="register-form" onSubmit={e => onSubmit(e)}>
-
-
             <div className="form-group">
               <label htmlFor="name" className="form-label">Full name</label>
               <div className="input-group">
@@ -173,6 +219,9 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
               Already have an account?{' '}
               <Link to="/login" className="auth-link">Sign In</Link>
             </p>
+            <p className="terms-text">
+              By creating an account, you agree to our <Link to="/terms" className="terms-link">Terms of Service</Link> and <Link to="/privacy" className="terms-link">Privacy Policy</Link>
+            </p>
           </div>
         </div>
       </div>
@@ -183,6 +232,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
 Register.propTypes = {
   setAlert: PropTypes.func.isRequired,
   register: PropTypes.func.isRequired,
+  socialLogin: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool
 };
 
@@ -190,4 +240,4 @@ const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated
 });
 
-export default connect(mapStateToProps, { setAlert, register })(Register);
+export default connect(mapStateToProps, { setAlert, register, socialLogin })(Register);
