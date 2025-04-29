@@ -35,6 +35,7 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
           <header className="profiles-header">
             <h1 className="title-primary">🌟 Discover Professionals</h1>
             <p className="subtitle">Find users by their name, skills, or location and grow your network!</p>
+            <br></br>
           </header>
 
           <section className="search-section">
