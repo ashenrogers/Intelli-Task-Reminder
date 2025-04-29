@@ -8,18 +8,9 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useGoogleLogin } from '@react-oauth/google';
 
-
 const Login = ({ login, isAuthenticated }) => {
-  const [formData, setFormData] = useState({
-    email: '',
-    password: ''
-  });
-
-  const [errors, setErrors] = useState({
-    email: '',
-    password: ''
-  });
-
+  const [formData, setFormData] = useState({ email: '', password: '' });
+  const [errors, setErrors] = useState({ email: '', password: '' });
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
@@ -38,7 +29,6 @@ const Login = ({ login, isAuthenticated }) => {
     return '';
   };
 
-  // Re-validate on every keystroke
   useEffect(() => {
     setErrors({
       email: validateEmail(email),
@@ -47,7 +37,6 @@ const Login = ({ login, isAuthenticated }) => {
   }, [email, password]);
 
   const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
-
   const togglePasswordVisibility = () => setPasswordVisible(!passwordVisible);
   const toggleRememberMe = () => setRememberMe(!rememberMe);
 
@@ -77,6 +66,19 @@ const Login = ({ login, isAuthenticated }) => {
       setIsLoading(false);
     }
   };
+
+  const handleGoogleLogin = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      try {
+        // Send tokenResponse.access_token to your backend for verification and login
+        toast.success('Google login successful!');
+        // Optionally: Redirect or dispatch Redux login here
+      } catch (err) {
+        toast.error('Google login failed.');
+      }
+    },
+    onError: () => toast.error('Google login failed.')
+  });
 
   if (isAuthenticated) {
     toast.dismiss();
@@ -166,7 +168,11 @@ const Login = ({ login, isAuthenticated }) => {
           <div className="login-divider"><span className="divider-text">or continue with</span></div>
 
           <div className="social-login">
-            <button type="button" className="social-button google-button">
+            <button
+              type="button"
+              className="social-button google-button"
+              onClick={() => handleGoogleLogin()}
+            >
               <i className="google-icon"></i><span>Google</span>
             </button>
             <button type="button" className="social-button facebook-button">
