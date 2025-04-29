@@ -61,14 +61,14 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
           
           <form className="register-form" onSubmit={e => onSubmit(e)}>
             <div className="form-group">
-              <label htmlFor="name" className="form-label">Full Name</label>
+              <label htmlFor="name" className="form-label">Full name</label>
               <div className="input-group">
                 <span className="input-icon">
                   <i className="user-icon"></i>
                 </span>
                 <input
                   id="name"
-                  type="text"
+                  type="plaintext"
                   placeholder="Enter your full name"
                   name="name"
                   value={name}
