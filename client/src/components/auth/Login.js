@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -13,49 +13,63 @@ const Login = ({ login, isAuthenticated }) => {
     password: ''
   });
 
+  const [errors, setErrors] = useState({
+    email: '',
+    password: ''
+  });
+
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
 
   const { email, password } = formData;
 
+  const validateEmail = (email) => {
+    if (!email) return 'Email is required';
+    if (!/\S+@\S+\.\S+/.test(email)) return 'Invalid email format';
+    return '';
+  };
+
+  const validatePassword = (password) => {
+    if (!password) return 'Password is required';
+    if (password.length < 6) return 'Password must be at least 6 characters';
+    return '';
+  };
+
+  // Re-validate on every keystroke
+  useEffect(() => {
+    setErrors({
+      email: validateEmail(email),
+      password: validatePassword(password)
+    });
+  }, [email, password]);
+
   const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const togglePasswordVisibility = () => {
-    setPasswordVisible(!passwordVisible);
-  };
-
-  const toggleRememberMe = () => {
-    setRememberMe(!rememberMe);
-  };
-
-  const validateEmail = email => {
-    return /\S+@\S+\.\S+/.test(email);
-  };
+  const togglePasswordVisibility = () => setPasswordVisible(!passwordVisible);
+  const toggleRememberMe = () => setRememberMe(!rememberMe);
 
   const onSubmit = async e => {
     e.preventDefault();
 
-    if (!validateEmail(email)) {
-      toast.error('Invalid email format (must include @ and domain)');
-      return;
-    }
+    const emailError = validateEmail(email);
+    const passwordError = validatePassword(password);
 
-    if (password.length < 6) {
-      toast.error('Password must be at least 6 characters long');
+    if (emailError || passwordError) {
+      setErrors({ email: emailError, password: passwordError });
+      toast.error('Please fix the errors before submitting.');
       return;
     }
 
     setIsLoading(true);
     try {
       const result = await login(email, password, rememberMe);
-      // Check result if login returns a promise with status
-      if (result && result.success) {
+      if (result?.success) {
         toast.success('Successfully logged in!');
       } else {
         toast.error('Invalid email or password');
       }
-    } catch (err) {
+    } catch {
       toast.error('Login failed. Please try again.');
     } finally {
       setIsLoading(false);
@@ -63,7 +77,7 @@ const Login = ({ login, isAuthenticated }) => {
   };
 
   if (isAuthenticated) {
-    toast.dismiss(); // Close all toasts
+    toast.dismiss();
     return <Redirect to="/dashboard" />;
   }
 
@@ -81,9 +95,6 @@ const Login = ({ login, isAuthenticated }) => {
             <div className="form-group">
               <label htmlFor="email" className="form-label">Email Address</label>
               <div className="input-group">
-                <span className="input-icon">
-                  <i className="email-icon"></i>
-                </span>
                 <input
                   id="email"
                   type="email"
@@ -91,33 +102,26 @@ const Login = ({ login, isAuthenticated }) => {
                   name="email"
                   value={email}
                   onChange={onChange}
-                  required
                   className="form-input"
                   autoComplete="email"
                 />
               </div>
+              {errors.email && <span className="error-text">{errors.email}</span>}
             </div>
 
             <div className="form-group">
               <div className="password-header">
                 <label htmlFor="password" className="form-label">Password</label>
-                <Link to="/forgot-password" className="forgot-password">
-                  Forgot password?
-                </Link>
+                <Link to="/forgot-password" className="forgot-password">Forgot password?</Link>
               </div>
               <div className="input-group">
-                <span className="input-icon">
-                  <i className="lock-icon"></i>
-                </span>
                 <input
                   id="password"
                   type={passwordVisible ? 'text' : 'password'}
                   placeholder="Enter your password"
                   name="password"
-                  minLength="6"
                   value={password}
                   onChange={onChange}
-                  required
                   className="form-input"
                   autoComplete="current-password"
                 />
@@ -130,6 +134,7 @@ const Login = ({ login, isAuthenticated }) => {
                   <i className={passwordVisible ? 'eye-slash-icon' : 'eye-icon'}></i>
                 </button>
               </div>
+              {errors.password && <span className="error-text">{errors.password}</span>}
             </div>
 
             <div className="form-group remember-me-group">
@@ -156,18 +161,14 @@ const Login = ({ login, isAuthenticated }) => {
             </div>
           </form>
 
-          <div className="login-divider">
-            <span className="divider-text">or continue with</span>
-          </div>
+          <div className="login-divider"><span className="divider-text">or continue with</span></div>
 
           <div className="social-login">
             <button type="button" className="social-button google-button">
-              <i className="google-icon"></i>
-              <span>Google</span>
+              <i className="google-icon"></i><span>Google</span>
             </button>
             <button type="button" className="social-button facebook-button">
-              <i className="facebook-icon"></i>
-              <span>Facebook</span>
+              <i className="facebook-icon"></i><span>Facebook</span>
             </button>
           </div>
 
