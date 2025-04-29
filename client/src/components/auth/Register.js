@@ -60,6 +60,8 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
           </div>
           
           <form className="register-form" onSubmit={e => onSubmit(e)}>
+
+
             <div className="form-group">
               <label htmlFor="name" className="form-label">Full name</label>
               <div className="input-group">
