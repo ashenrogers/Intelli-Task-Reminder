@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { parse, format, isValid } from "date-fns";
 import { addTask } from "../../actions/task";
 import { connect } from "react-redux";
-import backgroundImage from "../../img/v1.jpg"; // Import the image
+
 
 const VoiceForm = ({ addTask }) => {
   const [formData, setFormData] = useState({
