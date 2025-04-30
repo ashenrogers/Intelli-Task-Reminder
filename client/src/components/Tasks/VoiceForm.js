@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { parse, format, isValid } from "date-fns";
 import { addTask } from "../../actions/task";
 import { connect } from "react-redux";
-
+import backgroundImage from "../../img/v1.jpg"; // Import the image
 
 const VoiceForm = ({ addTask }) => {
   const [formData, setFormData] = useState({
@@ -19,7 +19,7 @@ const VoiceForm = ({ addTask }) => {
     let due_at = "";
     let time = "";
 
-    const dateMatch = input.match(/\b(?:on\s)?([A-Za-z]+(?:\s\d{1,2}(?:th|st|nd|rd)?))\s?(\d{1,2}:\d{2}\s?(?:am|pm))\b/i);
+    const dateMatch = input.match(/\b(?:on\s)?([A-Za-z]+\s\d{1,2}(?:st|nd|rd|th)?)[,]?\s+(\d{1,2}:\d{2}\s?(?:am|pm))\b/i);
 
     if (dateMatch) {
       const dateStr = dateMatch[1];
