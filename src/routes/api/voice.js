@@ -33,7 +33,7 @@ router.post("/", async (req, res) => {
 
 // @route   PUT /api/voice/:id
 // @desc    Update a voice task by ID
-router.put("/:id, async (req, res) => {
+router.put("/:id", async (req, res) => {
   const { description, due_at, time } = req.body;
 
   try {
