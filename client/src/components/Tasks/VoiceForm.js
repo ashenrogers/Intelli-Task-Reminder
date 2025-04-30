@@ -105,7 +105,7 @@ const VoiceForm = ({ addTask }) => {
           padding: "20px",
         }}
       >
-        <h1 className="large text-primary">Voice Task Creation</h1>
+        <h1 className="large text-primary">Voice Task an Creation</h1>
 
         <form className="form my-1" onSubmit={onSubmit}>
           <div style={{ display: "flex", alignItems: "center", marginBottom: "10px" }}>
