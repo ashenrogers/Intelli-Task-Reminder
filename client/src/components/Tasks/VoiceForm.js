@@ -95,7 +95,7 @@ const VoiceForm = ({ addTask }) => {
         padding: "80px",
         backgroundRepeat: "no-repeat",
         width: "100%", // Set the width of the background to 100% of the parent
-      }
+      }}
     >
       <div
         className="container"
