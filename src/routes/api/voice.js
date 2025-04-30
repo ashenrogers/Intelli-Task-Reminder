@@ -53,7 +53,7 @@ router.put("/:id", async (req, res) => {
 );
 
     if (!updatedTask) {
-      return res.status(404).json({ message: "" });
+      return res.status(404).json({ message: "Task not found" });
     }
 
     res.json({ message: "Task updated successfully!", task: updatedTask });
@@ -63,8 +63,7 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-// @route   DELETE /api/voice/:id
-// @desc    Delete a voice task by ID
+
 router.delete("/:id", async (req, res) => {
   try {
     const deletedTask = await Voice.findByIdAndDelete(req.params.id);
