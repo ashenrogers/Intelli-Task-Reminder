@@ -45,9 +45,14 @@ const VoiceForm = ({ addTask }) => {
     setIsListening(true); // Start animation when listening begins
 
     recognition.onresult = (event) => {
-      const voiceText = event.results[0][0].transcript;
-      processVoiceInput(voiceText);
-    };
+      if (event.results && event.results[0] && event.results[0][0]) {
+        const voiceText = event.results[0][0].transcript.trim();
+        processVoiceInput(voiceText);
+      } else {
+        console.warn("Speech recognition result is not in expected format:", event);
+      }
+    
+    
 
     recognition.onend = () => {
       setIsListening(false); // Stop animation when listening ends
