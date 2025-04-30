@@ -54,45 +54,31 @@ const VoiceForm = ({ addTask }) => {
     };
   };
 
-  const onSubmit = async (e) => {
+  const onSubmit = (e) => {
     e.preventDefault();
-  
-    // Basic validation
-    if (!formData.description || !formData.due_at || !formData.time) {
-      alert("Please fill in all required fields.");
-      return;
-    }
-  
-    try {
-      // Add the task
-      await addTask(formData);
-  
-      // Clear the form
-      setFormData({ description: "", due_at: "", time: "" });
-  
-      // Refresh task list
-      fetchTasks();
-    } catch (error) {
-      console.error("Task submission failed:", error);
-      alert("An error occurred while adding the task.");
-    }
+    addTask(formData);
+    setFormData({ description: "", due_at: "", time: "" });
+    fetchTasks();
   };
-  
 
   const fetchTasks = async () => {
     try {
+      // Optional: setLoading(true); if you manage a loading state
       const response = await fetch("/api/tasks");
-      if (response.ok) {
-        const data = await response.json();
-        setFetchedTasks(data);
-      } else {
-        console.error("Failed to fetch tasks");
+  
+      if (!response.ok) {
+        throw new Error(`Server error: ${response.status}`);
       }
+  
+      const data = await response.json();
+      setFetchedTasks(data);
     } catch (error) {
-      console.error("Error fetching tasks:", error);
+      console.error("Error fetching tasks:", error.message);
+    } finally {
+      // Optional: setLoading(false);
     }
   };
-
+  
   useEffect(() => {
     fetchTasks();
   }, []);
