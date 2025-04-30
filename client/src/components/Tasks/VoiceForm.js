@@ -150,7 +150,7 @@ const VoiceForm = ({ addTask }) => {
             <button
               type="submit"
               className="btn btn-dark button1"
-              style={{ backgroundColor:  }}
+              style={{ backgroundColor: "#04AA6D" }}
             >
               Submit Task
             </button>
