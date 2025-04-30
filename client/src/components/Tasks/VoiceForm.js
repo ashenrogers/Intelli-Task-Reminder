@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import backgroundImage from "../../img/v1.jpg"; // Import the image
 
 const VoiceForm = ({ addTask }) => {
-  
   const [formData, setFormData] = useState({
     description: "",
     due_at: "",
@@ -16,7 +15,8 @@ const VoiceForm = ({ addTask }) => {
   const [fetchedTasks, setFetchedTasks] = useState([]);
 
   const processVoiceInput = (input) => {
-    let description = input;
+
+    let description = ;
     let due_at = "";
     let time = "";
 
