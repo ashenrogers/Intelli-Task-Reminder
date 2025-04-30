@@ -38,22 +38,22 @@ router.put("/:id", async (req, res) => {
 
   try {
     const updatedTask = await Voice.findByIdAndUpdate(
-        req.params.id,
-        {
-          $set: {
-            description,
-            due_at,
-            time
-          }
-        },
-        {
-          new: true,
-          runValidators: true
-        }
-      );
-      
+  req.params.id,
+  {
+    $set: {
+      description,
+      due_at,
+      time
+    }
+  },
+  {
+    new: true,
+    runValidators: true
+  }
+);
+
     if (!updatedTask) {
-      return res.status(404).json({ message: "Task not found" });
+      return res.status(404).json({ message: "" });
     }
 
     res.json({ message: "Task updated successfully!", task: updatedTask });
