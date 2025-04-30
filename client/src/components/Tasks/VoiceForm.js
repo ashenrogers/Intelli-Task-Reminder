@@ -7,10 +7,12 @@ import backgroundImage from "../../img/v1.jpg"; // Import the image
 const VoiceForm = ({ addTask }) => {
   const [formData, setFormData] = useState({
     description: "",
-    due_at: "",
-    time: "",
+    due_at: "",     // expected as 'yyyy-MM-dd'
+    time: "",       // expected as 'HH:mm'
+    priority: "Normal",  // New field (optional)
+    isRecurring: false   // New field (optional)
   });
-
+  
   const [isListening, setIsListening] = useState(false); // To manage animation visibility
   const [fetchedTasks, setFetchedTasks] = useState([]);
 
