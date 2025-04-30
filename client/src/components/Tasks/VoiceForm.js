@@ -128,7 +128,7 @@ const VoiceForm = ({ addTask }) => {
             </div>
           </div>
 
-         
+          {/* New Time Field */}
           <div style={{ display: "flex", alignItems: "center", marginBottom: "10px" }}>
             <div style={{ flex: 1 }}>
               <label>Time:</label>
@@ -150,7 +150,7 @@ const VoiceForm = ({ addTask }) => {
             <button
               type="submit"
               className="btn btn-dark button1"
-              style={{ backgroundColor: "#04AA6D" }}
+              style={{ backgroundColor:  }}
             >
               Submit Task
             </button>
