@@ -2,7 +2,7 @@
 
 const express = require("express");
 const router = express.Router();
-const Voice = require("../models/voice");
+const Voice = require("../models/voice")
 
 // @route   GET /api/voice
 // @desc    Fetch all voice tasks
