@@ -63,20 +63,32 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-
+// @route   DELETE /api/voice/:id
+// @desc    Delete a voice task by ID
+// @route   DELETE /api/voice/:id
+// @desc    Delete a voice task by ID
+// @access  Public or Protected (adjust as needed)
 router.delete("/:id", async (req, res) => {
-  try {
-    const deletedTask = await Voice.findByIdAndDelete(req.params.id);
-
-    if (!deletedTask) {
-      return res.status(404).json({ message: "Task not found" });
+    try {
+      const { id } = req.params;
+  
+      // Check for valid MongoDB ObjectId
+      if (!id.match(/^[0-9a-fA-F]{24}$/)) {
+        return res.status(400).json({ message: "Invalid Task ID format" });
+      }
+  
+      const deletedTask = await Voice.findByIdAndDelete(id);
+  
+      if (!deletedTask) {
+        return res.status(404).json({ message: "No task found with the given ID" });
+      }
+  
+      res.status(200).json({ message: "Task deleted successfully", task: deletedTask });
+    } catch (error) {
+      console.error("Error deleting voice task:", error.message);
+      res.status(500).json({ message: "Internal Server Error" });
     }
-
-    res.json({ message: "Task deleted successfully!" });
-  } catch (error) {
-    console.error("Error deleting task:", error.message);
-    res.status(500).json({ message: "Server Error" });
-  }
-});
+  });
+  
 
 module.exports = router;
