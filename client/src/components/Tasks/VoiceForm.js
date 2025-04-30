@@ -54,12 +54,30 @@ const VoiceForm = ({ addTask }) => {
     };
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    addTask(formData);
-    setFormData({ description: "", due_at: "", time: "" });
-    fetchTasks();
+  
+    // Basic validation
+    if (!formData.description || !formData.due_at || !formData.time) {
+      alert("Please fill in all required fields.");
+      return;
+    }
+  
+    try {
+      // Add the task
+      await addTask(formData);
+  
+      // Clear the form
+      setFormData({ description: "", due_at: "", time: "" });
+  
+      // Refresh task list
+      fetchTasks();
+    } catch (error) {
+      console.error("Task submission failed:", error);
+      alert("An error occurred while adding the task.");
+    }
   };
+  
 
   const fetchTasks = async () => {
     try {
