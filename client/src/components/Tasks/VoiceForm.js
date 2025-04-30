@@ -25,14 +25,7 @@ const VoiceForm = ({ addTask }) => {
       const dateStr = dateMatch[1];
       const timeStr = dateMatch[2];
 
-      let parsedDate;
-try {
-  parsedDate = parse(`${dateStr} ${timeStr}`, "MMMM dd yyyy hh:mm a", new Date());
-  if (!isValid(parsedDate)) throw new Error("Invalid date");
-} catch (e) {
-  console.error("Date parsing failed:", e.message);
-}
-
+      const parsedDate = parse(`${dateStr} ${timeStr}`, "MMMM dd yyyy hh:mm a", new Date());
 
       if (isValid(parsedDate)) {
         due_at = format(parsedDate, "yyyy-MM-dd");
