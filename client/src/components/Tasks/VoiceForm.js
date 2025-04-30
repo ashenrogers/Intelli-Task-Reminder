@@ -110,7 +110,7 @@ const VoiceForm = ({ addTask }) => {
         <form className="form my-1" onSubmit={onSubmit}>
           <div style={{ display: "flex", alignItems: "center", marginBottom: "10px" }}>
             <div style={{ flex: 1 }}>
-              <label>Descriptions:</label>
+              <label>Description:</label>
               <input
                 type="text"
                 name="description"
@@ -128,7 +128,7 @@ const VoiceForm = ({ addTask }) => {
             </div>
           </div>
 
-          {/* New Time Field */}
+         
           <div style={{ display: "flex", alignItems: "center", marginBottom: "10px" }}>
             <div style={{ flex: 1 }}>
               <label>Time:</label>
