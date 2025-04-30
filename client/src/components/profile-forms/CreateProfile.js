@@ -1,10 +1,12 @@
 import React, { useState, Fragment } from "react";
-import { Link, withRouter } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { createProfile } from "../../actions/profile";
 
-const CreateProfile = ({ createProfile, history }) => {
+const CreateProfile = ({ createProfile }) => {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     location: "",
     age: "",
@@ -14,20 +16,11 @@ const CreateProfile = ({ createProfile, history }) => {
     instagram: ""
   });
 
-  const [errors, setErrors] = useState({
-    location: "",
-    age: "",
-    bio: "",
-    twitter: "",
-    facebook: "",
-    instagram: ""
-  });
-
+  const [errors, setErrors] = useState({});
   const [displaySocialInputs, toggleSocialInputs] = useState(false);
 
   const { location, age, bio, twitter, facebook, instagram } = formData;
 
-  // Enhanced validation function
   const validateField = (name, value) => {
     let error = "";
 
@@ -41,9 +34,11 @@ const CreateProfile = ({ createProfile, history }) => {
         break;
 
       case "location":
-        if (value && value.length < 2) {
+        if (!value) {
+          error = "Location is required";
+        } else if (value.length < 2) {
           error = "Location must be at least 2 characters";
-        } else if (value && value.length > 50) {
+        } else if (value.length > 50) {
           error = "Location must be less than 50 characters";
         }
         break;
@@ -57,7 +52,12 @@ const CreateProfile = ({ createProfile, history }) => {
       case "twitter":
       case "facebook":
       case "instagram":
-        if (value && !/^(https?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)$/.test(value)) {
+        if (
+          value &&
+          !/^(https?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)$/.test(
+            value
+          )
+        ) {
           error = "Please enter a valid URL";
         }
         break;
@@ -69,75 +69,51 @@ const CreateProfile = ({ createProfile, history }) => {
     return error;
   };
 
-  const onChange = e => {
+  const onChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value
+    }));
 
     const error = validateField(name, value);
-    setErrors(prevErrors => ({ ...prevErrors, [name]: error }));
+    setErrors((prev) => ({
+      ...prev,
+      [name]: error
+    }));
   };
 
-  // Validate all fields before submission
   const validateForm = () => {
     let formIsValid = true;
     const newErrors = {};
-    
-    // Check required fields
-    if (!location) {
-      newErrors.location = "Location is required";
-      formIsValid = false;
-    } else {
-      newErrors.location = validateField("location", location);
-      if (newErrors.location) formIsValid = false;
-    }
 
-    // Other validations
-    if (age) {
-      newErrors.age = validateField("age", age);
-      if (newErrors.age) formIsValid = false;
-    }
-
-    if (bio) {
-      newErrors.bio = validateField("bio", bio);
-      if (newErrors.bio) formIsValid = false;
-    }
-
-    if (twitter) {
-      newErrors.twitter = validateField("twitter", twitter);
-      if (newErrors.twitter) formIsValid = false;
-    }
-
-    if (facebook) {
-      newErrors.facebook = validateField("facebook", facebook);
-      if (newErrors.facebook) formIsValid = false;
-    }
-
-    if (instagram) {
-      newErrors.instagram = validateField("instagram", instagram);
-      if (newErrors.instagram) formIsValid = false;
-    }
+    Object.entries(formData).forEach(([key, value]) => {
+      const error = validateField(key, value);
+      if (error) {
+        formIsValid = false;
+        newErrors[key] = error;
+      }
+    });
 
     setErrors(newErrors);
     return formIsValid;
   };
 
-  const onSubmit = e => {
+  const onSubmit = (e) => {
     e.preventDefault();
-    
-    // Validate all fields before submission
+
     if (validateForm()) {
-      // Format social media URLs to ensure they have http/https
       const formattedData = { ...formData };
-      
-      ["twitter", "facebook", "instagram"].forEach(field => {
+
+      ["twitter", "facebook", "instagram"].forEach((field) => {
         if (formattedData[field] && !formattedData[field].match(/^https?:\/\//)) {
           formattedData[field] = `https://${formattedData[field]}`;
         }
       });
-      
-      createProfile(formattedData, history);
+
+      createProfile(formattedData, () => navigate("/dashboard"));
     } else {
-      // Scroll to the first error
       const firstErrorField = document.querySelector(".form-group small[style*='color: red']");
       if (firstErrorField) {
         firstErrorField.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -165,7 +141,7 @@ const CreateProfile = ({ createProfile, history }) => {
           <small className="form-text">Age</small>
           {errors.age && <small style={{ color: "red" }}>{errors.age}</small>}
         </div>
-        
+
         <div className="form-group">
           <input
             type="text"
@@ -180,7 +156,7 @@ const CreateProfile = ({ createProfile, history }) => {
           </small>
           {errors.location && <small style={{ color: "red" }}>{errors.location}</small>}
         </div>
-        
+
         <div className="form-group">
           <textarea
             placeholder="A short bio of yourself"
@@ -260,4 +236,4 @@ CreateProfile.propTypes = {
   createProfile: PropTypes.func.isRequired
 };
 
-export default connect(null, { createProfile })(withRouter(CreateProfile));
+export default connect(null, { createProfile })(CreateProfile);
