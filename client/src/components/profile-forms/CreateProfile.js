@@ -27,43 +27,31 @@ const CreateProfile = ({ createProfile, history }) => {
 
   const { location, age, bio, twitter, facebook, instagram } = formData;
 
-  // Enhanced validation function
   const validateField = (name, value) => {
     let error = "";
 
-    switch (name) {
-      case "age":
-        if (value && !/^\d+$/.test(value)) {
-          error = "Age must be a number";
-        } else if (value && (parseInt(value) < 13 || parseInt(value) > 120)) {
-          error = "Age must be between 13 and 120";
-        }
-        break;
+    if (name === "age") {
+      if (!/^\d*$/.test(value)) {
+        error = "Age must be a number";
+      }
+    }
 
-      case "location":
-        if (value && value.length < 2) {
-          error = "Location must be at least 2 characters";
-        } else if (value && value.length > 50) {
-          error = "Location must be less than 50 characters";
-        }
-        break;
+    if (name === "location") {
+      if (value.length < 2) {
+        error = "Location must be at least 2 characters";
+      }
+    }
 
-      case "bio":
-        if (value && value.length > 200) {
-          error = "Bio must be less than 200 characters";
-        }
-        break;
+    if (name === "bio") {
+      if (value.length > 200) {
+        error = "Bio must be less than 200 characters";
+      }
+    }
 
-      case "twitter":
-      case "facebook":
-      case "instagram":
-        if (value && !/^(https?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)$/.test(value)) {
-          error = "Please enter a valid URL";
-        }
-        break;
-
-      default:
-        break;
+    if (["twitter", "facebook", "instagram"].includes(name)) {
+      if (value && !/^https?:\/\/.+\..+/.test(value)) {
+        error = "Enter a valid URL";
+      }
     }
 
     return error;
@@ -77,81 +65,14 @@ const CreateProfile = ({ createProfile, history }) => {
     setErrors(prevErrors => ({ ...prevErrors, [name]: error }));
   };
 
-  // Validate all fields before submission
-  const validateForm = () => {
-    let formIsValid = true;
-    const newErrors = {};
-    
-    // Check required fields
-    if (!location) {
-      newErrors.location = "Location is required";
-      formIsValid = false;
-    } else {
-      newErrors.location = validateField("location", location);
-      if (newErrors.location) formIsValid = false;
-    }
-
-    // Other validations
-    if (age) {
-      newErrors.age = validateField("age", age);
-      if (newErrors.age) formIsValid = false;
-    }
-
-    if (bio) {
-      newErrors.bio = validateField("bio", bio);
-      if (newErrors.bio) formIsValid = false;
-    }
-
-    if (twitter) {
-      newErrors.twitter = validateField("twitter", twitter);
-      if (newErrors.twitter) formIsValid = false;
-    }
-
-    if (facebook) {
-      newErrors.facebook = validateField("facebook", facebook);
-      if (newErrors.facebook) formIsValid = false;
-    }
-
-    if (instagram) {
-      newErrors.instagram = validateField("instagram", instagram);
-      if (newErrors.instagram) formIsValid = false;
-    }
-
-    setErrors(newErrors);
-    return formIsValid;
-  };
-
   const onSubmit = e => {
     e.preventDefault();
-    
-    // Validate all fields before submission
-    if (validateForm()) {
-      // Format social media URLs to ensure they have http/https
-      const formattedData = { ...formData };
-      
-      ["twitter", "facebook", "instagram"].forEach(field => {
-        if (formattedData[field] && !formattedData[field].match(/^https?:\/\//)) {
-          formattedData[field] = `https://${formattedData[field]}`;
-        }
-      });
-      
-      createProfile(formattedData, history);
-    } else {
-      // Scroll to the first error
-      const firstErrorField = document.querySelector(".form-group small[style*='color: red']");
-      if (firstErrorField) {
-        firstErrorField.scrollIntoView({ behavior: "smooth", block: "center" });
-      }
-    }
+    createProfile(formData, history);
   };
 
   return (
     <Fragment>
       <h1 className="large text-primary">Tell us more about yourself</h1>
-      <p className="lead">
-        <i className="fas fa-user"></i> Let's get some information to make your profile stand out
-      </p>
-      <small>* = required field</small>
       <form className="form" onSubmit={onSubmit}>
         <div className="form-group">
           <input
@@ -160,7 +81,6 @@ const CreateProfile = ({ createProfile, history }) => {
             name="age"
             value={age}
             onChange={onChange}
-            className={errors.age ? "is-invalid" : ""}
           />
           <small className="form-text">Age</small>
           {errors.age && <small style={{ color: "red" }}>{errors.age}</small>}
@@ -169,11 +89,10 @@ const CreateProfile = ({ createProfile, history }) => {
         <div className="form-group">
           <input
             type="text"
-            placeholder="Location *"
+            placeholder="Location"
             name="location"
             value={location}
             onChange={onChange}
-            className={errors.location ? "is-invalid" : ""}
           />
           <small className="form-text">
             City & state suggested (eg. Ghaziabad, U.P)
@@ -187,7 +106,6 @@ const CreateProfile = ({ createProfile, history }) => {
             name="bio"
             value={bio}
             onChange={onChange}
-            className={errors.bio ? "is-invalid" : ""}
           ></textarea>
           <small className="form-text">Tell us a little about yourself</small>
           {errors.bio && <small style={{ color: "red" }}>{errors.bio}</small>}
@@ -214,7 +132,6 @@ const CreateProfile = ({ createProfile, history }) => {
                 name="twitter"
                 value={twitter}
                 onChange={onChange}
-                className={errors.twitter ? "is-invalid" : ""}
               />
               {errors.twitter && <small style={{ color: "red" }}>{errors.twitter}</small>}
             </div>
@@ -227,7 +144,6 @@ const CreateProfile = ({ createProfile, history }) => {
                 name="facebook"
                 value={facebook}
                 onChange={onChange}
-                className={errors.facebook ? "is-invalid" : ""}
               />
               {errors.facebook && <small style={{ color: "red" }}>{errors.facebook}</small>}
             </div>
@@ -240,7 +156,6 @@ const CreateProfile = ({ createProfile, history }) => {
                 name="instagram"
                 value={instagram}
                 onChange={onChange}
-                className={errors.instagram ? "is-invalid" : ""}
               />
               {errors.instagram && <small style={{ color: "red" }}>{errors.instagram}</small>}
             </div>
