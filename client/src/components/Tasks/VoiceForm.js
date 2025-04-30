@@ -7,12 +7,10 @@ import backgroundImage from "../../img/v1.jpg"; // Import the image
 const VoiceForm = ({ addTask }) => {
   const [formData, setFormData] = useState({
     description: "",
-    due_at: "",     // expected as 'yyyy-MM-dd'
-    time: "",       // expected as 'HH:mm'
-    priority: "Normal",  // New field (optional)
-    isRecurring: false   // New field (optional)
+    due_at: "",
+    time: "",
   });
-  
+
   const [isListening, setIsListening] = useState(false); // To manage animation visibility
   const [fetchedTasks, setFetchedTasks] = useState([]);
 
@@ -24,8 +22,9 @@ const VoiceForm = ({ addTask }) => {
     const dateMatch = input.match(/\b(?:on\s)?([A-Za-z]+(?:\s\d{1,2}(?:th|st|nd|rd)?))\s?(\d{1,2}:\d{2}\s?(?:am|pm))\b/i);
 
     if (dateMatch) {
-      const dateStr = dateMatch[1];
-      const timeStr = dateMatch[2];
+      const dateStr = dateMatch?.[1] || "";
+const timeStr = dateMatch?.[2] || "";
+
 
       const parsedDate = parse(`${dateStr} ${timeStr}`, "MMMM dd yyyy hh:mm a", new Date());
 
