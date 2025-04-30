@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const VoiceSchema = new mongoose.Schema({
   description: {
-    type: String,
+    type: String
     required: true,
   },
   due_at: {
