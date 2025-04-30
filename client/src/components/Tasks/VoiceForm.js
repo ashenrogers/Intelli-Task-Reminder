@@ -77,7 +77,7 @@ const VoiceForm = ({ addTask }) => {
   } catch (error) {
     console.error("Error fetching tasks:", error.message);
   } finally {
-    // Optional: setLoading(false);
+    
   }
 };
 
