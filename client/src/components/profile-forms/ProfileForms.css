@@ -1,0 +1,45 @@
+/* ProfileForms.css - Shared styling for Create & Edit Profile forms */
+
+:root {
+    --primary-color: #5c6bc0;
+    --primary-light: #8e99f3;
+    --primary-dark: #26418f;
+    --secondary-color: #26a69a;
+    --accent-color: #ff7043;
+    --light-bg: #f5f7ff;
+    --dark-text: #37474f;  
+    --medium-text: #546e7a;
+    --light-text: #78909c;
+    --border-color: #e0e0e0;
+    --error-color: #f44336;
+    --success-color: #4caf50;
+    --warning-color: #ff9800;
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+  }
+  
+  /* Container Styles */
+  .profile-form-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: var(--shadow-lg);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .profile-header {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    color: white;
+    padding: 2rem;
+    text-align: center;
+    border-radius: 12px 12px 0 0;
+  }
+  
+  .profile-header h1 {
+    margin: 0;
+    font-size: 2rem
