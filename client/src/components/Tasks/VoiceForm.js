@@ -15,8 +15,8 @@ const VoiceForm = ({ addTask }) => {
   const [fetchedTasks, setFetchedTasks] = useState([]);
 
   const processVoiceInput = (input) => {
-
-    let description = ;
+    
+    let description = input;
     let due_at = "";
     let time = "";
 
