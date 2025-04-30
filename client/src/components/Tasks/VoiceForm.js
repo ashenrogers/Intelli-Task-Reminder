@@ -62,23 +62,23 @@ const VoiceForm = ({ addTask }) => {
   };
 
   const fetchTasks = async () => {
-    try {
-      // Optional: setLoading(true); if you manage a loading state
-      const response = await fetch("/api/tasks");
-  
-      if (!response.ok) {
-        throw new Error(`Server error: ${response.status}`);
-      }
-  
-      const data = await response.json();
-      setFetchedTasks(data);
-    } catch (error) {
-      console.error("Error fetching tasks:", error.message);
-    } finally {
-      // Optional: setLoading(false);
+  try {
+    // Optional: setLoading(true); if you manage a loading state
+    const response = await fetch("/api/tasks");
+
+    if (!response.ok) {
+      throw new Error(`Server error: ${response.status}`);
     }
-  };
-  
+
+    const data = await response.json();
+    setFetchedTasks(data);
+  } catch (error) {
+    console.error("Error fetching tasks:", error.message);
+  } finally {
+    // Optional: setLoading(false);
+  }
+};
+
   useEffect(() => {
     fetchTasks();
   }, []);
@@ -95,7 +95,7 @@ const VoiceForm = ({ addTask }) => {
         padding: "80px",
         backgroundRepeat: "no-repeat",
         width: "100%", // Set the width of the background to 100% of the parent
-      }}
+      }
     >
       <div
         className="container"
