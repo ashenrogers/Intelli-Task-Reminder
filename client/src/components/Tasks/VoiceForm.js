@@ -32,6 +32,7 @@ const VoiceForm = ({ addTask }) => {
         time = format(parsedDate, "HH:mm");
         description = input.replace(dateMatch[0], "").trim();
       }
+      
     }
 
     setFormData({ ...formData, description, due_at, time });
