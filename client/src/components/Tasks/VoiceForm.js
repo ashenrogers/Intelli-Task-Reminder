@@ -22,7 +22,7 @@ const VoiceForm = ({ addTask }) => {
     const dateMatch = input.match(/\b(?:on\s)?([A-Za-z]+(?:\s\d{1,2}(?:th|st|nd|rd)?))\s?(\d{1,2}:\d{2}\s?(?:am|pm))\b/i);
 
     if (dateMatch) {
-      const dateStr = dateMatch[2];
+      const dateStr = dateMatch[1];
       const timeStr = dateMatch[2];
 
       const parsedDate = parse(`${dateStr} ${timeStr}`, "MMMM dd yyyy hh:mm a", new Date());
