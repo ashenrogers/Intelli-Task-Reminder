@@ -7,7 +7,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { addDays } from "date-fns";
 import { updateTask, getTaskById } from "../../actions/task";
-import "./TaskUpdateForm.css"; // Import the CSS file
+import "./TaskUpdateForm.css"; 
 
 class EditTask extends React.Component {
   constructor(props) {
@@ -19,8 +19,7 @@ class EditTask extends React.Component {
       toBeReminded: "",
       completed: "",
       priority: "",
-      category: "",
-      showUpdateModal: false // Added state for modal visibility
+      category: ""
     };
   }
 
@@ -45,23 +44,12 @@ class EditTask extends React.Component {
       }
     }, 300);
   }
+  
 
   onSubmit = e => {
     e.preventDefault();
     this.props.updateTask(this.props.Task.task._id, this.state);
-    this.setState({ 
-      description: "", 
-      due_at: "", 
-      time: "", 
-      priority: "", 
-      category: "",
-      showUpdateModal: true // Show success modal on update
-    });
-
-    // Redirect after 2 seconds
-    setTimeout(() => {
-      this.props.history.push("/tasks");
-    }, 2000);
+    this.setState({ description: "", due_at: "", time: "", priority: "", category: "" });
   };
 
   onChange = e => {
@@ -91,15 +79,20 @@ class EditTask extends React.Component {
             </div>
             
             <div className="form-group">
-              <label htmlFor="category">Category:</label>
-              <input
-                type="text"
-                placeholder="Enter Category"
-                name="category"
-                value={this.state.category}
-                onChange={e => this.onChange(e)}
-              />
-            </div>
+            <label htmlFor="category">Category:</label>
+            <select
+              name="category"
+              value={this.state.category}
+              onChange={e => this.onChange(e)}
+            >
+              <option value="">Select Category</option>
+              <option value="Work">Work</option>
+              <option value="Personal">Personal</option>
+              <option value="Shopping">Shopping</option>
+              <option value="Bills">Bills</option>
+            </select>
+          </div>
+
 
             <div className="form-group">
               <label>Priority:</label>
@@ -217,19 +210,6 @@ class EditTask extends React.Component {
             </Link>
           </div>
         </form>
-
-        {/* Success Modal */}
-        {this.state.showUpdateModal && (
-          <div className="modal-overlay">
-            <div className="modal">
-              <h2>Task Updated Successfully!</h2>
-              <p>Your task has been updated. You will be redirected to the task list.</p>
-              <div className="modal-footer">
-                <button onClick={() => this.setState({ showUpdateModal: false })}>Close</button>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
     );
   }
