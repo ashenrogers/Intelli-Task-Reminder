@@ -98,15 +98,9 @@ class EditTask extends React.Component {
               <label>Priority:</label>
               <select name="priority" value={this.state.priority} onChange={e => this.onChange(e)}>
                 <option value="">Select Priority</option>
-                <option value="High">
-                  <span className="priority-badge priority-high"></span> High
-                </option>
-                <option value="Medium">
-                  <span className="priority-badge priority-medium"></span> Medium
-                </option>
-                <option value="Low">
-                  <span className="priority-badge priority-low"></span> Low
-                </option>
+                <option value="High">High</option>
+                <option value="Medium">Medium</option>
+                <option value="Low">Low</option>
               </select>
             </div>
           </div>
