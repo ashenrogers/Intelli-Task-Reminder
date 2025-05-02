@@ -49,8 +49,23 @@ class EditTask extends React.Component {
   onSubmit = e => {
     e.preventDefault();
     this.props.updateTask(this.props.Task.task._id, this.state);
-    this.setState({ description: "", due_at: "", time: "", priority: "", category: "" });
+    
+    // Clear specific fields as before
+    this.setState({
+      description: "",
+      due_at: "",
+      time: "",
+      priority: "",
+      category: "",
+      success: true // Show success popup
+    });
+  
+    setTimeout(() => {
+      this.setState({ success: false });
+      this.props.history.push("/tasks"); // Redirect after 2 seconds
+    }, 2000);
   };
+  
 
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
