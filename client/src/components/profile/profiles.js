@@ -227,7 +227,7 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
       doc.setPage(i);
       doc.setFontSize(10);
       doc.setTextColor(150, 150, 150);
-      doc.text(`Developer Network - Page ${i} of ${totalPages}`, pageWidth / 2, doc.internal.pageSize.getHeight() - 10, { align: 'center' });
+      doc.text(`User Network - Page ${i} of ${totalPages}`, pageWidth / 2, doc.internal.pageSize.getHeight() - 10, { align: 'center' });
     }
     
     // Get the current user name if available from Redux store
@@ -440,8 +440,8 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
       ) : (
         <div className="profiles-container">
           <div className="page-header">
-            <h1><FiUsers className="header-icon" /> Developer Network</h1>
-            <p className="subtitle">Connect with talented professionals in your industry</p>
+            <h1><FiUsers className="header-icon" /> User Network</h1>
+            <p className="subtitle">Connect with talented professionals in your society</p>
           </div>
 
           <div className="action-bar">
