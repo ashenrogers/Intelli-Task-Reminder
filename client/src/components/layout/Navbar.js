@@ -15,9 +15,7 @@ const Navbar = ({ isAuthenticated, loading, logout }) => {
     const authLinks = (
         <ul className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
             <li>
-                <Link to='/profiles' onClick={toggleMenu}>
-                    Users
-                </Link>  
+                
             </li>
             <li>
                 <Link to='/dashboard' onClick={toggleMenu}>
@@ -43,7 +41,7 @@ const Navbar = ({ isAuthenticated, loading, logout }) => {
 
     const guestLinks = ( 
         <ul className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
-            <li><Link to="/profiles" onClick={toggleMenu}>Users</Link></li>
+            <li><Link to="/admin" onClick={toggleMenu}>AdminLogin</Link></li>
             <li><Link to="/register" onClick={toggleMenu}>Register</Link></li>
             <li><Link to="/login" onClick={toggleMenu}>Login</Link></li>
         </ul>
