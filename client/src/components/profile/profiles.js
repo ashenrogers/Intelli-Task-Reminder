@@ -198,7 +198,7 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
         // Use autoTable function directly
         autoTable(doc, {
           startY: 50,
-          head: [['Name', 'Status', 'Location', 'Skills', 'Company']],
+          head: [['Name', 'Status', 'Location']],
           body: tableData,
           theme: 'grid',
           headStyles: { fillColor: [108, 99, 255] },
@@ -381,7 +381,7 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
       
       doc.setFontSize(18);
       doc.setTextColor(108, 99, 255);
-      doc.text("PART 2: DETAILED DEVELOPER INFORMATION", 14, 20);
+      doc.text("PART 2: DETAILED USERS INFORMATION", 14, 20);
       
       // Create detailed table with developer information
       const tableData = filteredProfiles.map(profile => [

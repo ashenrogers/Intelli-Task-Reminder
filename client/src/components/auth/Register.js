@@ -50,6 +50,8 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
     return <Redirect to="/dashboard" />;
   }
 
+
+
   return (
     <div className="register-page">
       <div className="register-container">
@@ -67,7 +69,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
               <div className="input-group">
                 <span className="input-icon">
                   
-                </span>
+          </span>
                 <input
                   id="name"
                   type="plaintext"
@@ -103,7 +105,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             <div className="form-group">
               <label htmlFor="password" className="form-label">Password</label>
               <div className="input-group">
-                <span className="input-icon">
+          <span className="input-icon">
                  
                 </span>
                 <input
@@ -134,7 +136,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
               <div className="input-group">
                 <span className="input-icon">
                  
-                </span>
+          </span>
                 <input
                   id="password2"
                   type={confirmPasswordVisible ? "text" : "password"}
