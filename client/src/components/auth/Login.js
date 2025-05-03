@@ -111,10 +111,7 @@ const Login = ({ login, isAuthenticated }) => {
             </div>
 
             <div className="form-group">
-              <div className="password-header">
-                <label htmlFor="password" className="form-label">Password</label>
-                <Link to="/forgot-password" className="forgot-password">Forgot password?</Link>
-              </div>
+              
               <div className="input-group">
                 <input
                   id="password"
@@ -164,14 +161,7 @@ const Login = ({ login, isAuthenticated }) => {
 
           <div className="login-divider"><span className="divider-text">or continue with</span></div>
 
-          <div className="social-login">
-            <button type="button" className="social-button google-button">
-              <i className="google-icon"></i><span>Google</span>
-            </button>
-            <button type="button" className="social-button facebook-button">
-              <i className="facebook-icon"></i><span>Facebook</span>
-            </button>
-          </div>
+         
 
           <div className="login-footer">
             <p className="signup-link">

@@ -66,7 +66,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
               <label htmlFor="name" className="form-label">Full name</label>
               <div className="input-group">
                 <span className="input-icon">
-                  <i className="user-icon"></i>
+                  
                 </span>
                 <input
                   id="name"
@@ -85,7 +85,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
               <label htmlFor="email" className="form-label">Email Address</label>
               <div className="input-group">
                 <span className="input-icon">
-                  <i className="email-icon"></i>
+                 
                 </span>
                 <input
                   id="email"
@@ -104,7 +104,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
               <label htmlFor="password" className="form-label">Password</label>
               <div className="input-group">
                 <span className="input-icon">
-                  <i className="lock-icon"></i>
+                 
                 </span>
                 <input
                   id="password"
@@ -123,7 +123,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                   onClick={togglePasswordVisibility}
                   aria-label={passwordVisible ? "Hide password" : "Show password"}
                 >
-                  <i className={passwordVisible ? "eye-slash-icon" : "eye-icon"}></i>
+                  
                 </button>
               </div>
               <small className="password-hint">Must be at least 6 characters</small>
@@ -133,7 +133,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
               <label htmlFor="password2" className="form-label">Confirm Password</label>
               <div className="input-group">
                 <span className="input-icon">
-                  <i className="lock-icon"></i>
+                 
                 </span>
                 <input
                   id="password2"
@@ -152,7 +152,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                   onClick={toggleConfirmPasswordVisibility}
                   aria-label={confirmPasswordVisible ? "Hide password" : "Show password"}
                 >
-                  <i className={confirmPasswordVisible ? "eye-slash-icon" : "eye-icon"}></i>
+                 
                 </button>
               </div>
             </div>

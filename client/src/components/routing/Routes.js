@@ -16,6 +16,7 @@ import NotFound from '../layout/notFound';
 import VoiceForm from '../Tasks/VoiceForm';
 import TaskReport from '../Tasks/TaskReport';
 import RecycleBin from '../Tasks/RecycleBin';
+import AdminLogin from '../admin/AdminLogin';
 
 const Routes = ()=>{
     return (
@@ -24,6 +25,7 @@ const Routes = ()=>{
                 <Switch>
                 <Route exact path="/register" component={Register}/>
                 <Route exact path="/login" component={Login}/>
+                <Route exact path="/admin" component={AdminLogin}/>
                 <Route exact path="/profiles" component={Profiles}/>
                 <Route exact path="/profile/:id" component={Profile}/>
                 <PrivateRoute exact path="/dashboard" component={Dashboard} />
