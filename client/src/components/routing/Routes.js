@@ -16,7 +16,7 @@ import NotFound from '../layout/notFound';
 import VoiceForm from '../Tasks/VoiceForm';
 import TaskReport from '../Tasks/TaskReport';
 import RecycleBin from '../Tasks/RecycleBin';
-import AdminLogin from '../auth/AdminLogin';
+import AdminLogin from '../admin/AdminLogin';
 
 const Routes = ()=>{
     return (
